@@ -10,6 +10,7 @@
 <html>
     <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="style.css"/>
         <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
@@ -17,19 +18,39 @@
         <title>Login Page</title>
     </head>
     <body>
-        
-        <div class="container">
+        <jsp:setProperty  name="bean_signin" property="*" />
+        <div id="nav-container">
+            <nav class="navbar navbar-toggleable-md navbar-light bg-faded container-fluid fixed-top" data-spy="affix">
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data--target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link page-scroll navbar-brand text-center ml-5" href="index.html">Todolist</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link page-scroll text-center ml-5" href="#">Sign in</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link page-scroll text-center ml-5" href="signup.jsp">Sign up</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="container mt-5">
             <%
                 /*if (exception.getCause() instanceof InvalEa
-                        ) {
-                out.print("missatge a mostrar");
-                } else {
-                    out.print("asdf");
+                 ) {
+                 out.print("missatge a mostrar");
+                 } else {
+                 out.print("asdf");
 
-                }*/
+                 }*/
             %>
-            <h1 class="text-center mt-5 mb-5">Sign in to Plants</h1>
-            
+            <h1 class="text-center pt-5 mb-5">Sign in to Plants</h1>
+
             <% if (request.getParameter("email") == null) {%>
 
             <form class="form-horizontal" method="post">
@@ -49,15 +70,15 @@
                     </div>                    
                 </div>
             </form> 
-            
-            
-            <%} else {%>
+            <% } else { %>
             <jsp:forward page="ControlLogin?accio=login"/>
-            <%}%>
+            <% }%>
         </div>
-        
-            <div class="error>"<%= ${error_msg} %></div>
-        
+
+        <!--<div class="error">
+        <%-- <%= ${error_msg} %> --%>
+     </div>-->
+
 
     </body>
 </html>

@@ -1,0 +1,43 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 22-abr-2017, 11:53:34
+    Author     : clara
+*/
+
+.navbar {
+    padding: 0.5%!important;
+    background-color: white;
+    font-size: 13px;
+}
+
+body {
+    background-image: url(img/background.jpg);
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+h1 {
+    letter-spacing: 2px;
+    font-size: 43px;
+}
+
+h6 {
+    font-size: 22px;
+}
+
+.white {
+    color: white;
+}
+
+.btn-start {
+    background-color: #db4c3f!important;
+}
