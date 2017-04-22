@@ -22,24 +22,22 @@
     <body>
         <jsp:setProperty  name="bean_signup" property="*" />
         <div id="nav-container">
-            <nav class="navbar navbar-toggleable-md navbar-light bg-faded container-fluid fixed-top" data-spy="affix">
-                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data--target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link page-scroll navbar-brand text-center ml-5" href="index.html">Todolist</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link page-scroll text-center ml-5" href="signin.jsp">Sign in</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link page-scroll text-center ml-5" href="#">Sign up</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+            <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand ml-5" href="index.html">Todolist</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav text-center">
+                    <li class="nav-item ">
+                        <a class="nav-link  ml-5 pt-2" href="signin.jsp">Sign in</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link ml-5 pt-2" href="#">Sign up</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
         </div>
         <div class="container mt-5">
             <h1 class="text-center pt-5">Sign up to Plants</h1>
