@@ -54,12 +54,12 @@
             <form class="form-horizontal" method="post">
                 <div class="form-group mb-2">
                     <div class="col-md-4 offset-4">
-                        <input type="text" class="form-control" name="email" placeholder="Your email" />
+                        <input type="text" class="form-control" name="email" placeholder="Your email" required />
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-4 offset-4">
-                        <input type="password" class="form-control" name="password"  placeholder="Your password" />
+                        <input type="password" class="form-control" name="password"  placeholder="Your password" required />
                     </div>
                 </div>            
                 <div class="form-group mt-5">

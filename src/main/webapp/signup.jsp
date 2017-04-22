@@ -13,9 +13,7 @@
         <title>JSP Page</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
         <link rel="stylesheet" href="css/style.css"/>
-        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
     </head>
@@ -48,19 +46,19 @@
                 <div class="form-group">
                     <!--<label class="col-3">Username: </label>-->
                     <div class="col-md-4 offset-4">
-                        <input type="text" class="form-control" name="username" placeholder="Your email" />
+                        <input type="text" class="form-control" name="username" placeholder="Your email" required />
                     </div>
                 </div>
                 <div class="form-group">
                     <!--<label class="col-3">Email: </label>-->
                     <div class="col-md-4 offset-4">
-                        <input type="text" class="form-control" name="email" placeholder="Your email" />
+                        <input type="text" class="form-control" name="email" placeholder="Your email" required />
                     </div>
                 </div>
                 <div class="form-group">
                     <!--<label class="col-3">Password: </label>-->
                     <div class="col-md-4 offset-4">
-                        <input type="password" class="form-control" name="password"  placeholder="Your password"/>
+                        <input type="password" class="form-control" name="password"  placeholder="Your password" required />
                     </div>
                 </div>            
                 <div class="form-group  mt-5">
