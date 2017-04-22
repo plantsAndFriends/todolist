@@ -5,14 +5,19 @@
  */
 package controller;
 
+import com.mysql.jdbc.Connection;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.bd.DAOUser;
 import model.pojo.BeanUser;
+import model.bd.Bd;
 
 /**
  *
@@ -31,27 +36,24 @@ public class ControlLogin extends HttpServlet {
      */
      protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        System.out.println("hola");
         try {
             PrintWriter out = response.getWriter();
             DAOUser access = new DAOUser();
             String op = request.getParameter("action");
             
-
-            if (op.equals("login")) {
-                BeanUser user = (BeanUser) request.getAttribute("bean");
-                /*RequestDispatcher rd = request.getRequestDispatcher("verificar.jsp");
-                rd.forward(request, response);*/
-                //bd.verificarLogin(bp);
-                //System.out.println(bp);
+            if (op.equals("loginUser")) {
+                BeanUser user = (BeanUser) request.getAttribute("bean_signin");
+                if (access.validateUser(user)) {
+                    out.println("You in");
+                } else {
+                    out.println("You're not in");
+                }
             }
-            
-            
-            
         } catch (Exception e) {
             System.out.println("Some kind of error happened when you were chillin'");
             throw new ServletException(e);
         }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

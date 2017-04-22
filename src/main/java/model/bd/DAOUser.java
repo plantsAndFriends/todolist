@@ -7,6 +7,7 @@ package model.bd;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -33,24 +34,30 @@ public class DAOUser extends Bd {
         String email = bu.getPassword();
 
         stmt.executeUpdate("INSERT INTO user (username, password, email) VALUES ('" + username + "', '" + email + "', '" + password + "')");
+        System.out.println("inserted user");
     }
 
-    /*public boolean validateLoginUser(BeanUser bu) throws InvalidEmail {
-        boolean login = false;
-        String sql = "SELECT * FROM user WHERE email=" + bu.getEmail() + "AND password=" + bu.getPassword();
-        ResultSet rs = stmt.executeQuery(sql);
+    public boolean validateUser(BeanUser user) throws Exception {
+        boolean valid = false;
+        
         try {
-            while (rs.next()) {
-                System.out.println("You in");
+            String email = user.getEmail();
+            String password = user.getPassword();
+            
+            PreparedStatement pst = conn.prepareStatement("SELECT email, password FROM user WHERE email = ? and password = ?");
+            pst.setString(1, email);
+            pst.setString(2, password);
+            
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                valid = true;
             }
-            catch(Exception e){
-                throw new InvalidEmail();
-                }
-            return login;
+            
+        } catch (Exception e) {
+            System.out.println("Something went wrong");
         }
         
-    public void verificarLogin(BeanUser bu) throws Exception {
-        System.out.println(bu.getEmail());
-    }*/
+        return valid;
+    }
 
 }

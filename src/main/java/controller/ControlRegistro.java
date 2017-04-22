@@ -31,7 +31,6 @@ public class ControlRegistro extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        System.out.println("hola");
         try {
             PrintWriter out = response.getWriter();
             DAOUser access = new DAOUser();
@@ -39,7 +38,6 @@ public class ControlRegistro extends HttpServlet {
             
             if (op.equals("insertUser")) {
                 BeanUser user = (BeanUser) request.getAttribute("bean_signup");
-                System.out.println(user);
                 out.println("Signed up successfully.");
                 access.insertUser(user);
             } 
