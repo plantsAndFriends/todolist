@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.bd.DAOUser;
+import model.exception.*;
 import model.pojo.BeanUser;
 
 /**
@@ -35,12 +36,22 @@ public class ControlRegistro extends HttpServlet {
             PrintWriter out = response.getWriter();
             DAOUser access = new DAOUser();
             String op = request.getParameter("action");
-            
+
             if (op.equals("insertUser")) {
                 BeanUser user = (BeanUser) request.getAttribute("bean_signup");
-                out.println("Signed up successfully.");
-                access.insertUser(user);
-            } 
+                ValidatorUtil valid = new ValidatorUtil();
+                if (valid.validateUsername(user.getUsername()) && valid.validateMail(user.getEmail()) && valid.validatePassword(user.getPassword())) {
+                    out.println("Signed up successfully.");
+                    access.insertUser(user);
+                }else if(!valid.validateUsername(user.getUsername())){
+                    throw new WrongUsernameException();               
+                }else if(!valid.validateMail(user.getEmail())){
+                    throw new WrongMailException();
+                }else{
+                    throw new WrongPasswordException();
+                }
+
+            }
         } catch (Exception e) {
             System.out.println("Some kind of error happened when you were chillin'");
             throw new ServletException(e);

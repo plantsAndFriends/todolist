@@ -12,6 +12,7 @@
         <meta http-eq.javauiv="Content-Type" content="text/html; charset=UTF-8">
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" href="css/style.css"/>
 
         <title>JSP Page</title>
@@ -20,7 +21,7 @@
         <jsp:setProperty  name="bean_signup" property="*" />
         <div id="nav-container">
             <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"  aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <a class="navbar-brand ml-5" href="index.html">Todolist</a>
@@ -37,37 +38,39 @@
             </nav>
         </div>
         <div class="container mt-5">
-            <h1 class="text-center pt-5">Sign up to Plants</h1>
+            <h1 class="text-center pt-5">Sign up to Todolist</h1>
 
-            <% if (request.getParameter("username") == null) { %>
+            <% if (request.getParameter("username") == null) { %>           
+            <form class="form-horizontal" method="post">
+                <div class="form-group mt-5">
+                    <div class="input-group col-md-4 offset-4">
+                        <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                        <input type="text" class="form-control" name="username" placeholder="Your username" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group col-md-4 offset-4">
+                        <span class="input-group-addon">@</span>
+                        <input type="text" class="form-control" name="email" placeholder="Your email" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group col-md-4 offset-4">
+                        <span class="input-group-addon"><i class="fa fa-key" aria-hidden="true"></i></span>
+                        <input type="password" class="form-control" name="password"  placeholder="Your password" required />
+                    </div>
+                </div>            
+                <div class="form-group  mt-5">
+                    <div class="col-md-4 offset-4">
+                        <button class="btn btn-success" value="signin">Sign up</button>
+                    </div>                    
+                </div>
+            </form> 
 
-                <form class="form-horizontal" method="post">
-                    <div class="form-group">
-                        <div class="col-md-4 offset-4">
-                            <input type="text" class="form-control" name="username" placeholder="Your email" required />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-4 offset-4">
-                            <input type="text" class="form-control" name="email" placeholder="Your email" required />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-4 offset-4">
-                            <input type="password" class="form-control" name="password"  placeholder="Your password" required />
-                        </div>
-                    </div>            
-                    <div class="form-group  mt-5">
-                        <div class="col-md-4 offset-4">
-                            <button class="btn btn-success" value="signin">Sign up</button>
-                        </div>                    
-                    </div>
-                </form> 
-            
             <% } else { %>
-                <jsp:forward page="ControlRegistro?action=insertUser"/>
-            <% } %>
-            
+            <jsp:forward page="ControlRegistro?action=insertUser"/>
+            <% }%>
+
         </div>        
 
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

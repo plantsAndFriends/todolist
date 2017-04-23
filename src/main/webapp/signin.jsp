@@ -14,6 +14,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" href="css/style.css"/>
 
         <title>Login Page</title>
@@ -22,7 +23,7 @@
         <jsp:setProperty  name="bean_signin" property="*" />
         <div id="nav-container">
             <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <a class="navbar-brand ml-5" href="index.html">Todolist</a>
@@ -48,18 +49,20 @@
 
                  }*/
             %>--%>
-            <h1 class="text-center pt-5 mb-5">Sign in to Plants</h1>
+            <h1 class="text-center pt-5 mb-5">Sign in to Todolist</h1>
 
             <% if (request.getParameter("email") == null) { %>
 
                 <form class="form-horizontal" method="post">
-                    <div class="form-group mb-2">
-                        <div class="col-md-4 offset-4">
+                    <div class="form-group">
+                        <div class="input-group col-md-4 offset-4">
+                            <span class="input-group-addon">@</span>
                             <input type="text" class="form-control" name="email" placeholder="Your email" required />
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-md-4 offset-4">
+                        <div class="input-group col-md-4 offset-4">
+                            <span class="input-group-addon"><i class="fa fa-key" aria-hidden="true"></i></span>
                             <input type="password" class="form-control" name="password"  placeholder="Your password" required />
                         </div>
                     </div>            

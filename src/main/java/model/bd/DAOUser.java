@@ -59,5 +59,6 @@ public class DAOUser extends Bd {
         
         return valid;
     }
+       
 
 }
