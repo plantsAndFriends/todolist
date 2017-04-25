@@ -39,6 +39,11 @@
         </div>
         <div class="container mt-5">
             <h1 class="text-center pt-5">Sign up to Todolist</h1>
+            <% 
+               if(request.getAttribute("wop") == null){
+                   out.print("Hola");
+               }
+            %>
 
             <% if (request.getParameter("username") == null) { %>           
             <form class="form-horizontal" method="post">

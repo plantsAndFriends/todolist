@@ -7,12 +7,12 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.bd.DAOUser;
-import model.exception.*;
 import model.pojo.BeanUser;
 
 /**
@@ -36,21 +36,28 @@ public class ControlRegistro extends HttpServlet {
             PrintWriter out = response.getWriter();
             DAOUser access = new DAOUser();
             String op = request.getParameter("action");
-
+            String finalMessage = "";
+            
             if (op.equals("insertUser")) {
                 BeanUser user = (BeanUser) request.getAttribute("bean_signup");
                 ValidatorUtil valid = new ValidatorUtil();
                 if (valid.validateUsername(user.getUsername()) && valid.validateMail(user.getEmail()) && valid.validatePassword(user.getPassword())) {
                     out.println("Signed up successfully.");
                     access.insertUser(user);
-                }else if(!valid.validateUsername(user.getUsername())){                                        
-                      //out.println(user.getUsername());
+                }else if(!valid.validateUsername(user.getUsername())){
+                      String messageUsername = "Wrong username, try again";
+                      
+                      request.setAttribute("wop", messageUsername);
+                      RequestDispatcher rd = request.getRequestDispatcher("signup.jsp");
+                      rd.forward(request, response);
+                      
                 }else if(!valid.validateMail(user.getEmail())){
-                      //out.println(user.getEmail());                    
+                      String messageUsername = "Wrong email, try again";
+                
                 }else{
-                      //out.println(user.getPassword());                    
+                      String messageUsername = "Wrong password, try again";
                 }
-
+                
             }
         } catch (Exception e) {
             System.out.println("Some kind of error happened when you were chillin'");
