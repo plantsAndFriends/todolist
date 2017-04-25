@@ -15,8 +15,7 @@ import java.util.regex.Pattern;
  * @author Adria Viñas
  */
 public class ValidatorUtil {
-    private String patternMail = "^[_A-Za-z0-9-\\\\+]+(\\\\.[_A-Za-z0-9-]+)*@\"\n" +
-"            + \"[A-Za-z0-9-]+(\\\\.[A-Za-z0-9]+)*(\\\\.[A-Za-z]{2,})$";
+    private String patternMail = "[^@]+@[^@]+.[a-zA-Z]{2,}";
     
     private String patternUsername = "^[A-Za-z0-9]{3,}$";
     /*
