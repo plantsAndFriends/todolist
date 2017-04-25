@@ -11,6 +11,7 @@ import java.io.PrintWriter;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -44,9 +45,11 @@ public class ControlLogin extends HttpServlet {
             if (op.equals("loginUser")) {
                 BeanUser user = (BeanUser) request.getAttribute("bean_signin");
                 if (access.validateUser(user)) {
-                    out.println("You in");
+                    RequestDispatcher rd = request.getRequestDispatcher("app.jsp");
+                    rd.forward(request, response);
                 } else {
-                    out.println("You're not in");
+                    out.println("We're sorry! Wrong authentication!");
+                    out.println("<a href='signin.jsp'><button>Try again</button></a>");
                 }
             }
         } catch (Exception e) {

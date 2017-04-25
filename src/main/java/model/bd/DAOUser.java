@@ -34,7 +34,6 @@ public class DAOUser extends Bd {
         String email = bu.getPassword();
 
         stmt.executeUpdate("INSERT INTO user (username, password, email) VALUES ('" + username + "', '" + email + "', '" + password + "')");
-        System.out.println("inserted user");
     }
 
     public boolean validateUser(BeanUser user) throws Exception {

@@ -44,18 +44,25 @@ public class ControlRegistro extends HttpServlet {
                 if (valid.validateUsername(user.getUsername()) && valid.validateMail(user.getEmail()) && valid.validatePassword(user.getPassword())) {
                     out.println("Signed up successfully.");
                     access.insertUser(user);
-                }else if(!valid.validateUsername(user.getUsername())){
+                    RequestDispatcher rd = request.getRequestDispatcher("app.jsp");
+                    rd.forward(request, response);
+                } else {/*if(!valid.validateUsername(user.getUsername())){
                       String messageUsername = "Wrong username, try again";
                       
-                      request.setAttribute("wop", messageUsername);
-                      RequestDispatcher rd = request.getRequestDispatcher("signup.jsp");
-                      rd.forward(request, response);
+                      //request.setAttribute("wop", messageUsername);
+                      /*RequestDispatcher rd = request.getRequestDispatcher("signin.jsp");
+                      rd.forward(request, response);*/
+                      //out.println("Username: " + user.getUsername());
                       
-                }else if(!valid.validateMail(user.getEmail())){
+                /*}else if(!valid.validateMail(user.getEmail())){
                       String messageUsername = "Wrong email, try again";
                 
                 }else{
                       String messageUsername = "Wrong password, try again";
+                }*/
+                    out.println("Enter valid data!");
+                    out.println("<a href='signup.jsp'><button>Try again</button></a>");
+                    
                 }
                 
             }
