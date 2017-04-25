@@ -7,6 +7,7 @@ package controller;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import static java.util.regex.Pattern.CASE_INSENSITIVE;
 
 
 
@@ -15,8 +16,9 @@ import java.util.regex.Pattern;
  * @author Adria Viñas
  */
 public class ValidatorUtil {
-    private String patternMail = "^[_A-Za-z0-9-\\\\+]+(\\\\.[_A-Za-z0-9-]+)*@\"\n" +
-"            + \"[A-Za-z0-9-]+(\\\\.[A-Za-z0-9]+)*(\\\\.[A-Za-z]{2,})$";
+    /*private String patternMail = "^[_A-Za-z0-9-\\\\+]+(\\\\.[_A-Za-z0-9-]+)*@\"\n" +
+"            + \"[A-Za-z0-9-]+(\\\\.[A-Za-z0-9]+)*(\\\\.[A-Za-z]{2,})$";*/
+    private String patternMail = "^[A-Z0-9._+-]+@[A-Z0-9]+.[A-Z]{2,6}$";
     
     private String patternUsername = "^[A-Za-z0-9]{3,}$";
     /*
@@ -39,7 +41,7 @@ public class ValidatorUtil {
      * @return 
      */
     public boolean validateMail (String email){
-        Pattern pattern = Pattern.compile(patternMail);
+        Pattern pattern = Pattern.compile(patternMail, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(email);
                 
         return matcher.matches();
