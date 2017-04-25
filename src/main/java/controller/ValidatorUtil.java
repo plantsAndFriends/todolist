@@ -16,8 +16,6 @@ import static java.util.regex.Pattern.CASE_INSENSITIVE;
  * @author Adria Viñas
  */
 public class ValidatorUtil {
-    /*private String patternMail = "^[_A-Za-z0-9-\\\\+]+(\\\\.[_A-Za-z0-9-]+)*@\"\n" +
-"            + \"[A-Za-z0-9-]+(\\\\.[A-Za-z0-9]+)*(\\\\.[A-Za-z]{2,})$";*/
     private String patternMail = "^[A-Z0-9._+-]+@[A-Z0-9]+.[A-Z]{2,6}$";
     
     private String patternUsername = "^[A-Za-z0-9]{3,}$";

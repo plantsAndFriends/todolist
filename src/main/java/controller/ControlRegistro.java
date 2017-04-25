@@ -43,12 +43,12 @@ public class ControlRegistro extends HttpServlet {
                 if (valid.validateUsername(user.getUsername()) && valid.validateMail(user.getEmail()) && valid.validatePassword(user.getPassword())) {
                     out.println("Signed up successfully.");
                     access.insertUser(user);
-                }else if(!valid.validateUsername(user.getUsername())){
-                    throw new WrongUsernameException();               
+                }else if(!valid.validateUsername(user.getUsername())){                                        
+                      //out.println(user.getUsername());
                 }else if(!valid.validateMail(user.getEmail())){
-                    throw new WrongMailException();
+                      //out.println(user.getEmail());                    
                 }else{
-                    throw new WrongPasswordException();
+                      //out.println(user.getPassword());                    
                 }
 
             }
