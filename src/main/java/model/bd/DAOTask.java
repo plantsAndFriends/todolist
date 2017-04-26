@@ -7,6 +7,7 @@ package model.bd;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
 import model.pojo.BeanTask;
@@ -26,9 +27,11 @@ public class DAOTask{
         stmt = conn.createStatement();
     }
     
-    public void insertTask(BeanTask bt) throws Exception {
-        String task = bt.getTask();
-
+    public void insertTask(String task) throws Exception {
         stmt.executeUpdate("INSERT INTO task (task) VALUES ('" + task+ "')");
+    }
+    
+    public void removeTask(int id) throws SQLException {
+        stmt.executeUpdate("DELETE FROM task WHERE id = " + id);
     }
 }

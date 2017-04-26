@@ -16,7 +16,6 @@
         <title>Todolist App</title>
     </head>
     <body>
-        <jsp:setProperty  name="bean_addtask" property="*" />
         <div id="nav-container">
             <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"  aria-label="Toggle navigation">
@@ -42,21 +41,21 @@
         </div>
 
         <div class="container justify-content-center">
-            <% if (request.getParameter("task") == null) { %>
-            <form class="form-inline mt-5" action="" method="post">
+           <%-- <% if (request.getParameter("task") == null) { %>--%>
+            <form class="form-inline mt-5" action="ControlTask?action=addTask" method="post">
                 <div class="input-group col-md-6 offset-3">    
                     
                     <input type="text" class="form-control" name="task" placeholder="Create a task" />
                     
                     <span class="input-group-btn">
-                        <a href="ControlTask?action=addTask"><button class="btn btn-secondary" type="submit">+</button></a>
+                        <button class="btn btn-secondary" type="submit">+</button><
                     </span>
                 </div>
             </form>
-            <%} else {%>
-            <%--<jsp:forward page="ControlTask?action=addTask"/> --%>
+            <%--<%} else {%>
+            <jsp:forward page="ControlTask?action=addTask"/> 
                 
-            <%}%>                        
+            <%}%>                    --%>    
         </div>        
         
         <div class="container mt-5 justify-content-center">
