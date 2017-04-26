@@ -39,16 +39,14 @@ public class ControlTask extends HttpServlet {
             DAOTask access = new DAOTask();
             String op = request.getParameter("action");
             
-            if (op.equals("loginUser")) {
-                BeanTask task = (BeanTask) request.getAttribute("bean_addTask");
-                if (access.insertTask(task)) {
-                    request.getSession().setAttribute("sessuser", access.getUserByEmail(user.getEmail(), user.getPassword()));
-                    RequestDispatcher rd = request.getRequestDispatcher("app.jsp");
-                    rd.forward(request, response);
-                } else {
-                    out.println("We're sorry! Wrong authentication!");
-                    out.println("<a href='signin.jsp'><button>Try again</button></a>");
+            if (op.equals("addTask")) {
+                if (request.getParameter("task") != null) {
+                    access.insertTask(request.getParameter("task"));
+                    out.println("Task inserted");
                 }
+            }
+            if (op.equals("removeTask")) {
+                //access.removeTask((int) request.getParameter("id"));
             }
         } catch (Exception e) {
             System.out.println("Some kind of error happened when you were chillin'");
