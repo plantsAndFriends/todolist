@@ -28,9 +28,7 @@ public class DAOTask{
     
     public void insertTask(BeanTask bt) throws Exception {
         String task = bt.getTask();
-        Date startedAt = bt.getStartedAt();
-        Date completedAt = bt.getCompletedAt();
 
-        stmt.executeUpdate("INSERT INTO task (task, startedAt, completedAt) VALUES ('" + task + "', '" + startedAt + "', '" + completedAt + "')");
+        stmt.executeUpdate("INSERT INTO task (task) VALUES ('" + task+ "')");
     }
 }
