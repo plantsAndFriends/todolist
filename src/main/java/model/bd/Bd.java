@@ -14,10 +14,10 @@ import java.sql.SQLException;
  * @author clara
  */
 public class Bd {
-    private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/todolist";
-    private static final String ID_DB = "root";
-    private static final String PW_DB = "";
-    private static Connection CONNECTION = null;
+    protected static final String DATABASE_URL = "jdbc:mysql://localhost:3306/todolist";
+    protected static final String ID_DB = "root";
+    protected static final String PW_DB = "";
+    protected static Connection CONNECTION = null;
     
     public static Connection getConnexio() throws SQLException {
         if (CONNECTION == null) {

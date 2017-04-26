@@ -23,13 +23,18 @@
                 </button>
                 <a class="navbar-brand ml-5" href="index.html">Todolist</a>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav">
-                        <li class="nav-item ">
-                            <a class="nav-link  ml-5 pt-2" href="signin.jsp">Sign in</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link ml-5 pt-2" href="#">Sign up</a>
-                        </li>
+                    <ul class="navbar-nav float-right">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <% 
+                                    String us = (String)request.getSession().getAttribute("sessuser");
+                                    out.print(us);
+                                %>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                              <a class="dropdown-item" href="logout.jsp">Logout</a>
+                            </div>
+                          </div>
                     </ul>
                 </div>
             </nav>
@@ -38,16 +43,17 @@
         <div class="container justify-content-center">
             <% if (request.getParameter("task") == null) { %>
             <form class="form-inline mt-5" action="" method="post">
-                <div class="input-group col-md-6 offset-3">                    
+                <div class="input-group col-md-6 offset-3">    
+                    
                     <input type="text" class="form-control" name="task" placeholder="Create a task" />
+                    
                     <span class="input-group-btn">
-                        <button class="btn btn-secondary" type="submit">+</button>
+                        <a href="ControlTask?action=addTask"><button class="btn btn-secondary" type="submit">+</button></a>
                     </span>
                 </div>
             </form>
-            <!-- Se suposa que el controlador tornara a aquesta pagina -->
             <%} else {%>
-                <jsp:forward page="ControlTask?action=addTask"/> 
+            <%--<jsp:forward page="ControlTask?action=addTask"/> --%>
                 
             <%}%>                        
         </div>        

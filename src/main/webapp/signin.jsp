@@ -74,11 +74,6 @@
                 </form> 
             
             <% } else { %>
-                <!-- 
-                    READ: Substituir per "Contoller?action=login" (?)
-                    És absurd tenir un controller per ordre i passar-li el nom de la 
-                    ordre quan només fa aquella ordre 
-                -->
                 <jsp:forward page="ControlLogin?action=loginUser"/> 
             <% } %>
             
