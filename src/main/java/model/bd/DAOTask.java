@@ -7,7 +7,9 @@ package model.bd;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Date;
 import model.pojo.BeanTask;
 import model.pojo.BeanUser;
@@ -28,13 +30,34 @@ public class DAOTask{
     
     public void insertTask(BeanTask bt) throws Exception {
         String task = bt.getTask();
-        Date startedAt = bt.getStartedAt();
-        Date completedAt = bt.getCompletedAt();
 
-        stmt.executeUpdate("INSERT INTO task (task, startedAt, completedAt) VALUES ('" + task + "', '" + startedAt + "', '" + completedAt + "')");
+        stmt.executeUpdate("INSERT INTO task (task) VALUES ('" + task+ "')");
     }
     
-    public void updateTast(BeanTask bt)throws Exception {
-        String task = bt.getTask();
+//    public void updateTask(String task)throws Exception {
+//        
+//    }
+    
+    public ArrayList<BeanTask> getTasks() throws Exception{
+        ResultSet rs= stmt.executeQuery("SELECT * FROM task");
+        
+        ArrayList<BeanTask> listTask = new ArrayList();
+        
+        while(rs.next()){
+            BeanTask task = new BeanTask();
+            
+            int id = rs.getInt("id");
+            String t = rs.getString("task");
+            Date st = rs.getDate("startedAt");
+            Date ct = rs.getDate("completedAt");
+            
+            task.setId(id);
+            task.setTask(t);
+            task.setStartedAt(st);
+            task.setCompletedAt(ct);
+            
+            listTask.add(task);
+        }
+        return listTask;
     }
 }

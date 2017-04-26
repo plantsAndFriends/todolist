@@ -12,6 +12,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.bd.DAOTask;
+import model.pojo.BeanTask;
 
 /**
  *
@@ -34,12 +36,12 @@ public class ControlTask extends HttpServlet {
         
         try {
             PrintWriter out = response.getWriter();
-            DAOUser access = new DAOUser();
+            DAOTask access = new DAOTask();
             String op = request.getParameter("action");
             
             if (op.equals("loginUser")) {
-                BeanUser user = (BeanUser) request.getAttribute("bean_signin");
-                if (access.validateUser(user)) {
+                BeanTask task = (BeanTask) request.getAttribute("bean_addTask");
+                if (access.insertTask(task)) {
                     request.getSession().setAttribute("sessuser", access.getUserByEmail(user.getEmail(), user.getPassword()));
                     RequestDispatcher rd = request.getRequestDispatcher("app.jsp");
                     rd.forward(request, response);
