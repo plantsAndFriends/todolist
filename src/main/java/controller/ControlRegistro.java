@@ -37,7 +37,7 @@ public class ControlRegistro extends HttpServlet {
             DAOUser access = new DAOUser();
             String op = request.getParameter("action");
             String finalMessage = "";
-            
+
             if (op.equals("insertUser")) {
                 BeanUser user = (BeanUser) request.getAttribute("bean_signup");
                 ValidatorUtil valid = new ValidatorUtil();
@@ -46,25 +46,31 @@ public class ControlRegistro extends HttpServlet {
                     access.insertUser(user);
                     RequestDispatcher rd = request.getRequestDispatcher("app.jsp");
                     rd.forward(request, response);
-                } else {/*if(!valid.validateUsername(user.getUsername())){
-                      String messageUsername = "Wrong username, try again";
-                      
-                      //request.setAttribute("wop", messageUsername);
-                      /*RequestDispatcher rd = request.getRequestDispatcher("signin.jsp");
-                      rd.forward(request, response);*/
-                      //out.println("Username: " + user.getUsername());
-                      
-                /*}else if(!valid.validateMail(user.getEmail())){
-                      String messageUsername = "Wrong email, try again";
-                
-                }else{
-                      String messageUsername = "Wrong password, try again";
-                }*/
-                    out.println("Enter valid data!");
-                    out.println("<a href='signup.jsp'><button>Try again</button></a>");
+                } else {
                     
+                    if (!valid.validateUsername(user.getUsername())) {
+                        String messageUsername = "Wrong username, try again";
+                        finalMessage += messageUsername + "\n\r";
+                        //out.println("Username: " + user.getUsername());
+
+                    }
+                    if (!valid.validateMail(user.getEmail())) {
+                        String messageEmail = "Wrong email, try again";
+                        finalMessage += messageEmail + "\n\r";
+                    }
+
+                    if (!valid.validateMail(user.getPassword())) {
+                        String messagePass = "Wrong password, try again";
+                        finalMessage += messagePass + "\n\r";
+                    }
+
+                    request.setAttribute("messageErr", finalMessage);
+                    RequestDispatcher rd = request.getRequestDispatcher("auxjsp.jsp");
+                    rd.forward(request, response);
+                    /*out.println("Enter valid data!");
+                    out.println("<a href='signup.jsp'><button>Try again</button></a>");*/
                 }
-                
+
             }
         } catch (Exception e) {
             System.out.println("Some kind of error happened when you were chillin'");
