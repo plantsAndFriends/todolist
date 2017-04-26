@@ -38,26 +38,46 @@ public class DAOUser extends Bd {
 
     public boolean validateUser(BeanUser user) throws Exception {
         boolean valid = false;
-        
+
         try {
             String email = user.getEmail();
             String password = user.getPassword();
-            
+
             PreparedStatement pst = conn.prepareStatement("SELECT email, password FROM user WHERE email = ? and password = ?");
             pst.setString(1, email);
             pst.setString(2, password);
-            
+
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
                 valid = true;
             }
-            
+
         } catch (Exception e) {
             System.out.println("Something went wrong");
         }
-        
+
         return valid;
     }
-       
+
+    public String getUserByEmail(String email, String password) {
+        String username = "";
+
+        try {
+
+            PreparedStatement pst = conn.prepareStatement("SELECT username FROM user WHERE email = ? and password = ?");
+
+            pst.setString(1, email);
+            pst.setString(2, password);
+
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                username = rs.getString("username");
+            }
+        } catch (Exception e) {
+            System.out.println("");
+        }
+
+        return username;
+    }
 
 }

@@ -8,6 +8,10 @@
         <servlet-name>ControlLogin</servlet-name>
         <servlet-class>controller.ControlLogin</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ControlTask</servlet-name>
+        <servlet-class>controller.ControlTask</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ControlRegistro</servlet-name>
         <url-pattern>/ControlRegistro</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>ControlLogin</servlet-name>
         <url-pattern>/ControlLogin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControlTask</servlet-name>
+        <url-pattern>/ControlTask</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
