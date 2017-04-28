@@ -4,8 +4,11 @@
     Author     : Adria Viñas
 --%>
 
-<%@page import="model.pojo.BeanTask"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.Collections"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="model.bd.DAOTask"%>
+<%@ page import="model.pojo.BeanTask"%>
+<%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html>
@@ -60,13 +63,17 @@
                 <div class="col-sm-8 offset-2">
                     <h1 class="text-center">Tasks</h1>
                     <div>
-                        <% 
-                                    ArrayList<BeanTask> tasks = new ArrayList();
-                                    tasks = (ArrayList<BeanTask>)request.getAttribute("tasks");
-                                    
-                                    for (BeanTask t : tasks) {
-                                        out.println("<p>" + t.getTask() + "</p>");
-                                    }
+                        <%          
+                            DAOTask task = new DAOTask();
+                            ArrayList<BeanTask> beanTask = task.getTasks();
+                            Collections.reverse(beanTask);
+                            
+                            if (task != null) {
+                                Iterator<BeanTask> it = beanTask.iterator();
+                                while (it.hasNext()) {
+                                    out.println("<p>" + it.next().getTask() + "</p>");
+                                } 
+                            }
                         %>
                     </div>
                 </div>

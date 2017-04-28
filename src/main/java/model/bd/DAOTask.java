@@ -38,7 +38,7 @@ public class DAOTask extends Bd{
 //        
 //    }
     public ArrayList<BeanTask> getTasks() throws Exception {
-        ResultSet rs = stmt.executeQuery("SELECT * FROM task");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM task ORDER BY id");
 
         ArrayList<BeanTask> listTask = new ArrayList();
 
