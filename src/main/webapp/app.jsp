@@ -4,7 +4,9 @@
     Author     : Adria Viñas
 --%>
 
+<%@page import="model.pojo.BeanTask"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -41,7 +43,6 @@
         </div>
 
         <div class="container justify-content-center">
-           <%-- <% if (request.getParameter("task") == null) { %>--%>
             <form class="form-inline mt-5" action="ControlTask?action=addTask" method="post">
                 <div class="input-group col-md-6 offset-3">    
                     
@@ -52,10 +53,6 @@
                     </span>
                 </div>
             </form>
-            <%--<%} else {%>
-            <jsp:forward page="ControlTask?action=addTask"/> 
-                
-            <%}%>                    --%>    
         </div>        
         
         <div class="container mt-5 justify-content-center">
@@ -63,7 +60,14 @@
                 <div class="col-sm-8 offset-2">
                     <h1 class="text-center">Tasks</h1>
                     <div>
-                        
+                        <% 
+                                    ArrayList<BeanTask> tasks = new ArrayList();
+                                    tasks = (ArrayList<BeanTask>)request.getAttribute("tasks");
+                                    
+                                    for (BeanTask t : tasks) {
+                                        out.println("<p>" + t.getTask() + "</p>");
+                                    }
+                        %>
                     </div>
                 </div>
             </div>

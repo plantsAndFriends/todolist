@@ -24,7 +24,8 @@ public class DAOTask extends Bd{
     private Connection conn;
     private Statement stmt;
 
-    public DAOTask() throws Exception {        
+    public DAOTask() throws Exception {     
+        
         conn = getConnexio();
         stmt = conn.createStatement();
     }
@@ -32,7 +33,7 @@ public class DAOTask extends Bd{
     public void insertTask(String task) throws Exception {
         stmt.executeUpdate("INSERT INTO task (task) VALUES ('" + task + "')");
     }
-
+    
 //    public void updateTask(String task)throws Exception {
 //        
 //    }

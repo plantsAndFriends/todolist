@@ -43,8 +43,8 @@
                out.print(request.getAttribute("messageFinal"));
             %>
 
-            <% if (request.getParameter("username") == null) { %>           
-            <form class="form-horizontal" method="post">
+            <%--<% if (request.getParameter("username") == null) { %>--%>        
+            <form class="form-horizontal"  action="ControlRegsitro?action=insertUser" method="post">
                 <div class="form-group mt-5">
                     <div class="input-group col-md-4 offset-4">
                         <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
@@ -70,9 +70,9 @@
                 </div>
             </form> 
 
-            <% } else { %>
+            <%--<% } else { %>
             <jsp:forward page="ControlRegistro?action=insertUser"/>
-            <% }%>
+            <% }%>--%>
 
         </div>        
 
