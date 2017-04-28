@@ -23,8 +23,8 @@ public class DAOUser extends Bd {
     private Statement stmt;
 
     public DAOUser() throws Exception {
-        Class.forName("com.mysql.jdbc.Driver");
-        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/todolist", "root", "");
+        
+        conn = getConnexio();
         stmt = conn.createStatement();
     }
 

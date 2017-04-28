@@ -19,14 +19,13 @@ import model.pojo.BeanUser;
  *
  * @author clara
  */
-public class DAOTask {
-
+public class DAOTask extends Bd{
+    
     private Connection conn;
     private Statement stmt;
 
-    public DAOTask() throws Exception {
-        Class.forName("com.mysql.jdbc.Driver");
-        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/todolist", "root", "");
+    public DAOTask() throws Exception {        
+        conn = getConnexio();
         stmt = conn.createStatement();
     }
 
