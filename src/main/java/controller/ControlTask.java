@@ -42,8 +42,8 @@ public class ControlTask extends HttpServlet {
             if (op.equals("addTask")) {
                 if (request.getParameter("task") != null) {
                     access.insertTask(request.getParameter("task"));
-                    out.println("Task inserted");
-                    request.setAttribute("tasks", access.getTasks());
+                    
+                    //request.setAttribute("tasks", access.getTasks());
                     RequestDispatcher rq = request.getRequestDispatcher("app.jsp");
                     rq.forward(request, response);
                 }

@@ -24,3 +24,14 @@ and open the template in the editor.
 .white {
     color: white!important;
 }
+
+.fa-pencil{
+    color: brown !important;
+}
+.fa-check{
+    color: green !important;
+}
+
+.fa-trash{
+    color: red !important;
+}
