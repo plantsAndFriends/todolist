@@ -74,13 +74,11 @@
                                 out.println("<ul class='list-group text-center'></ul>");
                                 Iterator<BeanTask> it = beanTask.iterator();
                                 while (it.hasNext()) {
-                                    out.println("<li class='list-group-item' ><span class='mx-auto'>" + it.next().getTask() + "</span><span class='pr-3'><i class='fa fa-pencil' aria-hidden='true'></i></span><span class='pr-3'><i class='fa fa-check' aria-hidden='true'></i></span><span><i class='fa fa-trash' aria-hidden='true'></i></span>"+
-                                                    "<a data-toggle='collapse' data-parent='#accordion' href='#collapseOne' aria-expand></a>"
-                                            + "</li>");
-                                    out.println("div id='collapseOne'"+
-                                            "<div class='card>"+
-                                                    "<div class='card-block'>This is play pause</div>"
-                                              + "</div>");
+                                    out.println("<li class='list-group-item' >"+"<a class='mx-auto' data-toggle='collapse' data-parent='#accordion' href='#collapseOne' aria-expand>" + it.next().getTask() + "</a>"+"<span class='pr-3'><i class='fa fa-pencil' aria-hidden='true'></i></span><span class='pr-3'><i class='fa fa-check' aria-hidden='true'></i></span><span><i class='fa fa-trash' aria-hidden='true'></i></span>"+
+                                                    
+                                            "</li>");
+                                    
+                                    
                                 }
                                 out.println("</ul>");
                             }
