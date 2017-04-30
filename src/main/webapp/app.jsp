@@ -66,21 +66,34 @@
                 <div class="col-sm-8 offset-2">                    
                     <div id="accordion">
                         <%
+                            int cont = 0;
                             DAOTask task = new DAOTask();
                             ArrayList<BeanTask> beanTask = task.getTasks();
                             Collections.reverse(beanTask);
 
                             if (task != null) {
-                                out.println("<ul class='list-group text-center'></ul>");
+                                out.println("<div id='accordion' role='tablist' aria-multiselectable='true' class='text-center'>");
                                 Iterator<BeanTask> it = beanTask.iterator();
                                 while (it.hasNext()) {
-                                    out.println("<li class='list-group-item' >"+"<a class='mx-auto' data-toggle='collapse' data-parent='#accordion' href='#collapseOne' aria-expand>" + it.next().getTask() + "</a>"+"<span class='pr-3'><i class='fa fa-pencil' aria-hidden='true'></i></span><span class='pr-3'><i class='fa fa-check' aria-hidden='true'></i></span><span><i class='fa fa-trash' aria-hidden='true'></i></span>"+
-                                                    
-                                            "</li>");
-                                    
+                                    out.println("<div class='card' >");
+                                        out.println("<div class='card-header' role='tab' id=heading"+cont+ " >");
+                                            out.println("<h5 class='mb-0'>");
+                                                out.println("<a class='collapsed' data-toggle='collapse' data-parent='#accordion' href='#collapse"+cont+" aria-expanded='false' aria-controls='collapse'"+cont+" >" + it.next().getTask() + "</a>");                                                 
+                                                out.println("<span class='pr-3 push-sm-3'><i class='fa fa-pencil' aria-hidden='true'></i></span>"); 
+                                                out.println("<span class='pr-3'><i class='fa fa-check' aria-hidden='true'></i></span>");
+                                                out.println("<span><i class='fa fa-trash' aria-hidden='true'></i></span>");
+                                            out.println("</h5>");
+                                        out.println("</div>");
+                                        out.println("<div id='collapse"+cont+" class='collapse' role='tabpanel' aria-labelledby=heading"+cont+" >");
+                                            out.println("<div class='card-block'>");
+                                                out.println("lalalalalalalala");
+                                            out.println("</div>");
+                                        out.println("</div>");
+                                    out.println("</div>");
+                                    cont++;
                                     
                                 }
-                                out.println("</ul>");
+                                out.println("</div>");
                             }
                         %>
                     </div>
