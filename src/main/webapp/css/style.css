@@ -26,14 +26,14 @@ and open the template in the editor.
 }
 
 .fa-pencil{
-    color: brown !important;
+    color: #f0ad4e !important;
 }
 .fa-check{
-    color: green !important;
+    color: #5cb85c !important;
 }
 
 .fa-trash{
-    color: red !important;
+    color: #d9534f !important;
 }
 
 
