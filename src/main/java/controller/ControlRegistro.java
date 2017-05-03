@@ -31,18 +31,21 @@ public class ControlRegistro extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("hola");
         response.setContentType("text/html;charset=UTF-8");
+        
         try {
             PrintWriter out = response.getWriter();
             DAOUser access = new DAOUser();
             String op = request.getParameter("action");
             String finalMessage = "";
+            
 
             if (op.equals("insertUser")) {
                 BeanUser user = (BeanUser) request.getAttribute("bean_signup");
                 ValidatorUtil valid = new ValidatorUtil();
+                
                 if (valid.validateUsername(user.getUsername()) && valid.validateMail(user.getEmail()) && valid.validatePassword(user.getPassword())) {
-                    out.println("Signed up successfully.");
                     access.insertUser(user);
                     RequestDispatcher rd = request.getRequestDispatcher("app.jsp");
                     rd.forward(request, response);

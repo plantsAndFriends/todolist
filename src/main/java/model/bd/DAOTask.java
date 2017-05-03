@@ -19,13 +19,13 @@ import model.pojo.BeanUser;
  *
  * @author clara
  */
-public class DAOTask extends Bd{
-    
+public class DAOTask extends Bd {
+
     private Connection conn;
     private Statement stmt;
 
-    public DAOTask() throws Exception {     
-        
+    public DAOTask() throws Exception {
+
         conn = getConnexio();
         stmt = conn.createStatement();
     }
@@ -33,7 +33,7 @@ public class DAOTask extends Bd{
     public void insertTask(String task) throws Exception {
         stmt.executeUpdate("INSERT INTO task (task) VALUES ('" + task + "')");
     }
-    
+
 //    public void updateTask(String task)throws Exception {
 //        
 //    }
@@ -58,11 +58,10 @@ public class DAOTask extends Bd{
             listTask.add(task);
         }
         return listTask;
-    
-        
 
-//    public void removeTask(int id) throws SQLException {
-//        stmt.executeUpdate("DELETE FROM task WHERE id = " + id);
-//    }
-}
+    }
+
+    public void removeTask(int id) throws SQLException {
+        stmt.executeUpdate("DELETE FROM task WHERE id = " + id);
+    }
 }
