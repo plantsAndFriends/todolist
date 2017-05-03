@@ -58,9 +58,9 @@
                     </span>
                 </div>
             </form>
-                        
+
         </div>        
-        
+
         <div class="container mt-5">
             <div class="row">
                 <div class="col-sm-8 offset-2">                    
@@ -73,26 +73,28 @@
 
                             if (task != null) {
                                 out.println("<div id='accordion' role='tablist' aria-multiselectable='true' class='text-center'>");
-                                Iterator<BeanTask> it = beanTask.iterator();
-                                while (it.hasNext()) {
-                                    out.println("<div class='card' >");
-                                        out.println("<div class='card-header' role='tab' id=heading"+cont+ " >");
-                                            out.println("<h5 class='mb-0'>");
-                                                out.println("<a class='collapsed' data-toggle='collapse' data-parent='#accordion' href='#collapse"+cont+" aria-expanded='false' aria-controls='collapse'"+cont+" >" + it.next().getTask() + "</a>");                                                 
-                                                out.println("<span class='pr-3 push-sm-3'><i class='fa fa-pencil' aria-hidden='true'></i></span>"); 
-                                                out.println("<span class='pr-3'><i class='fa fa-check' aria-hidden='true'></i></span>");
-                                                out.println("<span><i class='fa fa-trash' aria-hidden='true'></i></span>");
-                                            out.println("</h5>");
-                                        out.println("</div>");
-                                        out.println("<div id='collapse"+cont+" class='collapse' role='tabpanel' aria-labelledby=heading"+cont+" >");
-                                            out.println("<div class='card-block'>");
-                                                out.println("lalalalalalalala");
-                                            out.println("</div>");
-                                        out.println("</div>");
+                                //Iterator<BeanTask> it = beanTask.iterator();
+                                for (BeanTask ts : beanTask) {
+                                    out.println("<div class='card' >"); 
+                                    out.println("<div class='card-header' role='tab' id=heading" + cont + " >");
+                                    out.println("<h5 class='mb-0'>");
+                                    out.println("<a class='collapsed' data-toggle='collapse' data-parent='#accordion' href='#collapse" + cont + " aria-expanded='false' aria-controls='collapse'" + cont + " >" + ts.getTask()+ "</a>");
+                                    out.println("<span class='pr-3 push-sm-3'><i class='fa fa-pencil' aria-hidden='true'></i></span>");
+                                    out.println("<span class='pr-3'><i class='fa fa-check' aria-hidden='true'></i></span>");
+                                    out.print("<span><a href=ControlTask?action=removeTask&id=");
+                                        out.print( ts.getId() );
+                                        out.println("><i class='fa fa-trash' aria-hidden='true'></i></a></span>");
+                                    out.println("</h5>");
+                                    out.println("</div>");
+                                    out.println("<div id='collapse" + cont + " class='collapse' role='tabpanel' aria-labelledby=heading" + cont + " >");
+                                  out.println("<div class='card-block'>");
+                                    out.println("lalalalalalalala");
+                                    out.println("</div>");
+                                    out.println("</div>");
                                     out.println("</div>");
                                     cont++;
-                                    
                                 }
+
                                 out.println("</div>");
                             }
                         %>

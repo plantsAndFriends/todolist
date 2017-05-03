@@ -42,14 +42,16 @@ public class ControlTask extends HttpServlet {
             if (op.equals("addTask")) {
                 if (request.getParameter("task") != null) {
                     access.insertTask(request.getParameter("task"));
-                    
-                    //request.setAttribute("tasks", access.getTasks());
                     RequestDispatcher rq = request.getRequestDispatcher("app.jsp");
                     rq.forward(request, response);
                 }
             }
             if (op.equals("removeTask")) {
-                //access.removeTask((int) request.getParameter("id"));
+                String req = request.getParameter("id");
+                int id = Integer.parseInt(req);
+                access.removeTask(id);
+                RequestDispatcher rq = request.getRequestDispatcher("app.jsp");
+                rq.forward(request, response);
             }
         } catch (Exception e) {
             System.out.println("Some kind of error happened when you were chillin'");
