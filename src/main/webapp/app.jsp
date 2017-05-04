@@ -32,10 +32,6 @@
                     <ul class="navbar-nav">
                         <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <%--<%
-                                    /*String us = (String) request.getSession().getAttribute("sessuser");
-                                    out.print(us);*/
-                                %>--%>
                                 <%= session.getAttribute("sessuser") %>
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -84,14 +80,10 @@
                                                     out.println("<div class='d-flex flex-row-reverse'>");
                                                     
                                                         // Trash
-                                                        out.println("<span><a href=ControlTask?action=removeTask&id=");
-                                                            out.print( ts.getId() );
-                                                        out.println("><i class='fa fa-trash' aria-hidden='true'></i></a></span>");
+                                                        out.println("<span><a href='ControlTask?action=removeTask&id=" + ts.getId() + "'><i class='fa fa-trash' aria-hidden='true'></i></a></span>");
 
                                                         // Done
-                                                        out.println("<span class='pr-3'><a href=ControlTask?action=doneTask&id=");
-                                                            out.print( ts.getId() );
-                                                        out.println("><i class='fa fa-check' aria-hidden='true'></i></a></span>");
+                                                        out.println("<span class='pr-3'><a href='ControlTask?action=doneTask&id=" + ts.getId() + "'><i class='fa fa-check' aria-hidden='true'></i></a></span>");
 
                                                         // Modify
                                                         out.println("<span class='pr-3 push-sm-3'><i class='fa fa-pencil' aria-hidden='true'></i></span>");
@@ -103,10 +95,10 @@
                                             out.println("<div class='card-block text-center'>");                                    
                                                 
                                                 // Start
-                                                out.println("<span class=''><a href='ControlTask?action=start&id='"+ ts.getId() +"role='button' class='btn btn-secondary '><i class='fa fa-play' aria-hidden='true'></i></a></span>");
+                                                out.println("<span class=''><a href='ControlTask?action=start&id=" + ts.getId() + "' role='button' class='btn btn-secondary '><i class='fa fa-play' aria-hidden='true'></i></a></span>");
                                                 
                                                 // Pause
-                                                out.println("<span class=''><a href='ControlTask?action=pause'"+  ts.getId() +"role='button' class='btn btn-secondary '><i class='fa fa-stop' aria-hidden='true'></i></a></span>");
+                                                out.println("<span class=''><a href='ControlTask?action=pause&id=" +  ts.getId() + "' role='button' class='btn btn-secondary '><i class='fa fa-stop' aria-hidden='true'></i></a></span>");
                                             out.println("</div>");
                                         out.println("</div>");
                                     out.println("</div>");
