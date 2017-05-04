@@ -34,9 +34,6 @@ public class DAOTask extends Bd {
         stmt.executeUpdate("INSERT INTO task (task) VALUES ('" + task + "')");
     }
 
-//    public void updateTask(String task)throws Exception {
-//        
-//    }
     public ArrayList<BeanTask> getTasks() throws Exception {
         ResultSet rs = stmt.executeQuery("SELECT * FROM task ORDER BY id");
 
@@ -63,5 +60,13 @@ public class DAOTask extends Bd {
 
     public void removeTask(int id) throws SQLException {
         stmt.executeUpdate("DELETE FROM task WHERE id = " + id);
+    }
+    
+    public void startTask(int id) throws SQLException {
+        stmt.executeUpdate("UPDATE task SET startedAt = NOW() WHERE id = " + id);
+    }
+    
+    public  void pauseTask(int id) throws SQLException {
+        stmt.executeUpdate("UPDATE task SET completedAt = NOW() WHERE id = " + id);
     }
 }

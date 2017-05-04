@@ -77,24 +77,40 @@
                                 out.println("<div id='accordion' role='tablist' aria-multiselectable='true' class='text-center'>");
 
                                 for (BeanTask ts : beanTask) { 
-                                    out.println("<div class='card' >"); 
-                                    out.println("<div class='card-header role='tab' id=heading" + cont + " >");
-                                    out.println("<h5 class='mb-0'>");
-                                    out.println("<div class='d-flex justify-content-center'><a class='collapsed' data-toggle='collapse' data-parent='#accordion' href='#collapse" + cont + "' aria-expanded='false' aria-controls='collapse" + cont + "' >" + ts.getTask()+ "</a></div>");
-                                    out.print("<div class='d-flex flex-row-reverse p-6'><span><a href=ControlTask?action=removeTask&id=");
-                                        out.print( ts.getId() );
-                                        out.println("><i class='fa fa-trash' aria-hidden='true'></i></a></span>");
-                                    out.println("<span class='pr-3'><i class='fa fa-check' aria-hidden='true'></i></span>");
-                                    out.println("<span class='pr-3 push-sm-3'><i class='fa fa-pencil' aria-hidden='true'></i></span></div>");
-                                    out.println("</h5>");
+                                    out.println("<div class='card mb-2'>"); 
+                                        out.println("<div class='card-header' role='tab' id=heading" + cont + " >");
+                                            out.println("<h5>");
+                                                out.println("<div id='task' class='d-flex justify-content-center'><a class='collapsed' data-toggle='collapse' data-parent='#accordion' href='#collapse" + cont + "' aria-expanded='false' aria-controls='collapse" + cont + "' >" + ts.getTask()+ "</a></div>");
+                                                    out.println("<div class='d-flex flex-row-reverse'>");
+                                                    
+                                                        // Trash
+                                                        out.println("<span><a href=ControlTask?action=removeTask&id=");
+                                                            out.print( ts.getId() );
+                                                        out.println("><i class='fa fa-trash' aria-hidden='true'></i></a></span>");
+
+                                                        // Done
+                                                        out.println("<span class='pr-3'><a href=ControlTask?action=doneTask&id=");
+                                                            out.print( ts.getId() );
+                                                        out.println("><i class='fa fa-check' aria-hidden='true'></i></a></span>");
+
+                                                        // Modify
+                                                        out.println("<span class='pr-3 push-sm-3'><i class='fa fa-pencil' aria-hidden='true'></i></span>");
+                                                        
+                                                    out.println("</div>");
+                                            out.println("</h5>");
+                                        out.println("</div>");
+                                        out.println("<div id='collapse" + cont + "' class='collapse' role='tabpanel' aria-labelledby=heading" + cont + " >");
+                                            out.println("<div class='card-block text-center'>");                                    
+                                                
+                                                // Start
+                                                out.println("<span class=''><a href='ControlTask?action=start&id='"+ ts.getId() +"role='button' class='btn btn-secondary '><i class='fa fa-play' aria-hidden='true'></i></a></span>");
+                                                
+                                                // Pause
+                                                out.println("<span class=''><a href='ControlTask?action=pause'"+  ts.getId() +"role='button' class='btn btn-secondary '><i class='fa fa-stop' aria-hidden='true'></i></a></span>");
+                                            out.println("</div>");
+                                        out.println("</div>");
                                     out.println("</div>");
-                                    out.println("<div id='collapse" + cont + "' class='collapse' role='tabpanel' aria-labelledby=heading" + cont + " >");
-                                  out.println("<div class='card-block text-center'>");                                    
-                                    out.println("<span class='pr-3'><a role='button' class='btn btn-default btn-lg'><i class='fa fa-play' aria-hidden='true'></i></a></span>");
-                                    out.println("<span class='pr-3'><a role='button' class='btn btn-default btn-lg'><i class='fa fa-stop' aria-hidden='true'></i></a></span>");
-                                    out.println("</div>");
-                                    out.println("</div>");
-                                    out.println("</div>");
+                                    
                                     cont++;
                                 }
 
@@ -106,8 +122,14 @@
             </div>
         </div>
 
-        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+        
+        <script>
+            $('.fa-check').click(function() {
+               $(this).parents('.card-header').addClass('alert alert-success');
+            });
+        </script>
     </body>
 </html>

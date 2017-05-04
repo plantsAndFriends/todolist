@@ -59,8 +59,18 @@ public class ControlTask extends HttpServlet {
                 case "doneTask":
                     req = request.getParameter("id");
                     id = Integer.parseInt(req);
+                    //Thread.sleep(5000); // sleep 5 seconds
                     access.removeTask(id);
-                    
+                    break;
+                case "start":
+                    req = request.getParameter("id");
+                    id = Integer.parseInt(req);
+                    access.startTask(id);
+                    break;
+                case "pause":
+                    req = request.getParameter("id");
+                    id = Integer.parseInt(req);
+                    access.pauseTask(id);
             }
             
             
