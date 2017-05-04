@@ -106,6 +106,8 @@
                                                 
                                                 // Pause
                                                 out.println("<span class=''><a href='ControlTask?action=pause&id=" +  ts.getId() + "' role='button' class='btn btn-secondary '><i class='fa fa-stop' aria-hidden='true'></i></a></span>");
+                                            
+                                                out.println("<p id='totalTime'></p>");
                                             out.println("</div>");
                                         out.println("</div>");
                                     out.println("</div>");
@@ -129,6 +131,8 @@
             $('.fa-check').click(function() {
                $(this).parents('.card-header').addClass('alert alert-success');
             });
+            
+          
         </script>
     </body>
 </html>

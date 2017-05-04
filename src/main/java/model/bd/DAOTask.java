@@ -70,4 +70,13 @@ public class DAOTask extends Bd {
     public void pauseTask(int id) throws SQLException {
         stmt.executeUpdate("UPDATE task SET completedAt = NOW() WHERE id = " + id);
     }
+    
+    public void totalTime() { // retornarà algo
+        /*BeanTask task = new BeanTask();
+        Date start = task.getStartedAt();
+        System.out.println("start: " + start);*/
+        
+        // Canviar-ho per SELECT's directament
+        // Enllaç per la diferència entre hores en Java: https://www.mkyong.com/java/how-to-calculate-date-time-difference-in-java/
+    }
 }
