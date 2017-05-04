@@ -38,55 +38,35 @@ public class ControlTask extends HttpServlet {
             PrintWriter out = response.getWriter();
             DAOTask access = new DAOTask();
             String op = request.getParameter("action");
-            String req;
-            int id;
 
+            String req;
+            int id = 0;
+
+            if (!op.equals("addTask")) {
+                req = request.getParameter("id");
+                id = Integer.parseInt(req);
+            }
             switch (op) {
                 case "addTask":
                     if (request.getParameter("task") != null) {
-                        access.insertTask(request.getParameter("task"), (int) request.getSession().getAttribute("sessid"));
-                        RequestDispatcher rq = request.getRequestDispatcher("app.jsp");
-                        rq.forward(request, response);
+                        access.insertTask(request.getParameter("task"), Integer.parseInt(request.getSession().getAttribute("sessid").toString()));
                     }
                     break;
                 case "removeTask":
-                    req = request.getParameter("id");
-                    id = Integer.parseInt(req);
                     access.removeTask(id);
-                    RequestDispatcher rq = request.getRequestDispatcher("app.jsp");
-                    rq.forward(request, response);
                     break;
                 case "doneTask":
-                    req = request.getParameter("id");
-                    id = Integer.parseInt(req);
-                    //Thread.sleep(5000); // sleep 5 seconds
+                    Thread.sleep(100); // sleep
                     access.removeTask(id);
                     break;
                 case "start":
-                    req = request.getParameter("id");
-                    id = Integer.parseInt(req);
                     access.startTask(id);
                     break;
                 case "pause":
-                    req = request.getParameter("id");
-                    id = Integer.parseInt(req);
                     access.pauseTask(id);
             }
-
-            /*if (op.equals("addTask")) {
-                if (request.getParameter("task") != null) {
-                    access.insertTask(request.getParameter("task"));
-                    RequestDispatcher rq = request.getRequestDispatcher("app.jsp");
-                    rq.forward(request, response);
-                }
-            } else 
-            if (op.equals("removeTask")) {
-                String req = request.getParameter("id");
-                int id = Integer.parseInt(req);
-                access.removeTask(id);
-                RequestDispatcher rq = request.getRequestDispatcher("app.jsp");
-                rq.forward(request, response);
-            }*/
+            RequestDispatcher rq = request.getRequestDispatcher("app.jsp");
+            rq.forward(request, response);
         } catch (Exception e) {
             System.out.println("Some kind of error happened when you were chillin'");
             throw new ServletException(e);
@@ -131,6 +111,7 @@ public class ControlTask extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
-
+    }
+    
 }
+
