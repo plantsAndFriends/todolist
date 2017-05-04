@@ -52,6 +52,13 @@ public class ControlLogin extends HttpServlet {
                     out.println("We're sorry! Wrong authentication!");
                     out.println("<a href='signin.jsp'><button>Try again</button></a>");
                 }
+            } else {
+                if (op.equals("logout")) {
+                    request.getSession().invalidate();
+                    RequestDispatcher rd = request.getRequestDispatcher("index.html");
+                    rd.forward(request, response);
+                    
+                }
             }
         } catch (Exception e) {
             System.out.println("Some kind of error happened when you were chillin'");

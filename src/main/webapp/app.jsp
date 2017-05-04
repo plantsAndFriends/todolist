@@ -4,9 +4,9 @@
     Author     : Adria Viñas
 --%>
 
-<%@page import="java.util.Collections"%>
-<%@page import="java.util.Iterator"%>
-<%@page import="model.bd.DAOTask"%>
+<%@ page import="java.util.Collections"%>
+<%@ page import="java.util.Iterator"%>
+<%@ page import="model.bd.DAOTask"%>
 <%@ page import="model.pojo.BeanTask"%>
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList"%>
@@ -22,22 +22,23 @@
     </head>
     <body>
         <div id="nav-container">
-            <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+            <nav class="navbar navbar-right navbar-toggleable-md navbar-light bg-faded">
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"  aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <a class="navbar-brand ml-5" href="index.html">Todolist</a>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav float-right">
+                    <ul class="navbar-nav">
                         <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <%
-                                    String us = (String) request.getSession().getAttribute("sessuser");
-                                    out.print(us);
-                                %>
+                                <%--<%
+                                    /*String us = (String) request.getSession().getAttribute("sessuser");
+                                    out.print(us);*/
+                                %>--%>
+                                <%= session.getAttribute("username") %>
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="logout.jsp">Logout</a>
+                                <a class="dropdown-item" href="ControlLogin?action=logout">Logout</a>
                             </div>
                         </div>
                     </ul>
@@ -74,16 +75,16 @@
                             if (task != null) {
                                 out.println("<div id='accordion' role='tablist' aria-multiselectable='true' class='text-center'>");
 
-                                for (BeanTask ts : beanTask) {
+                                for (BeanTask ts : beanTask) { 
                                     out.println("<div class='card' >"); 
-                                    out.println("<div class='card-header' role='tab' id=heading" + cont + " >");
+                                    out.println("<div class='card-header role='tab' id=heading" + cont + " >");
                                     out.println("<h5 class='mb-0'>");
-                                    out.println("<a class='collapsed' data-toggle='collapse' data-parent='#accordion' href='#collapse" + cont + "' aria-expanded='false' aria-controls='collapse" + cont + "' >" + ts.getTask()+ "</a>");
-                                    out.print("<span class=''><a href=ControlTask?action=removeTask&id=");
+                                    out.println("<div class='d-flex justify-content-center'><a class='collapsed' data-toggle='collapse' data-parent='#accordion' href='#collapse" + cont + "' aria-expanded='false' aria-controls='collapse" + cont + "' >" + ts.getTask()+ "</a></div>");
+                                    out.print("<div class='d-flex flex-row-reverse p-6'><span><a href=ControlTask?action=removeTask&id=");
                                         out.print( ts.getId() );
-                                        out.println("><i class='fa fa-trash pull-right' aria-hidden='true'></i></a></span>");
-                                    out.println("<span class='pr-3'><i class='fa fa-check  pull-right' aria-hidden='true'></i></span>");
-                                    out.println("<span class='pr-3 push-sm-3'><i class='fa fa-pencil  pull-right' aria-hidden='true'></i></span>");
+                                        out.println("><i class='fa fa-trash' aria-hidden='true'></i></a></span>");
+                                    out.println("<span class='pr-3'><i class='fa fa-check' aria-hidden='true'></i></span>");
+                                    out.println("<span class='pr-3 push-sm-3'><i class='fa fa-pencil' aria-hidden='true'></i></span></div>");
                                     out.println("</h5>");
                                     out.println("</div>");
                                     out.println("<div id='collapse" + cont + "' class='collapse' role='tabpanel' aria-labelledby=heading" + cont + " >");
