@@ -38,21 +38,47 @@ public class ControlTask extends HttpServlet {
             PrintWriter out = response.getWriter();
             DAOTask access = new DAOTask();
             String op = request.getParameter("action");
+            String req;
+            int id;
             
-            if (op.equals("addTask")) {
+            switch (op) {
+                case "addTask":
+                    if (request.getParameter("task") != null) {
+                        access.insertTask(request.getParameter("task"));
+                        RequestDispatcher rq = request.getRequestDispatcher("app.jsp");
+                        rq.forward(request, response);
+                    }
+                    break;
+                case "removeTask":
+                    req = request.getParameter("id");
+                    id = Integer.parseInt(req);
+                    access.removeTask(id);
+                    RequestDispatcher rq = request.getRequestDispatcher("app.jsp");
+                    rq.forward(request, response);
+                    break;
+                case "doneTask":
+                    req = request.getParameter("id");
+                    id = Integer.parseInt(req);
+                    access.removeTask(id);
+                    
+            }
+            
+            
+            
+            /*if (op.equals("addTask")) {
                 if (request.getParameter("task") != null) {
                     access.insertTask(request.getParameter("task"));
                     RequestDispatcher rq = request.getRequestDispatcher("app.jsp");
                     rq.forward(request, response);
                 }
-            }
+            } else 
             if (op.equals("removeTask")) {
                 String req = request.getParameter("id");
                 int id = Integer.parseInt(req);
                 access.removeTask(id);
                 RequestDispatcher rq = request.getRequestDispatcher("app.jsp");
                 rq.forward(request, response);
-            }
+            }*/
         } catch (Exception e) {
             System.out.println("Some kind of error happened when you were chillin'");
             throw new ServletException(e);
