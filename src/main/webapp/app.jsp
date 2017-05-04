@@ -88,8 +88,9 @@
                                     out.println("</h5>");
                                     out.println("</div>");
                                     out.println("<div id='collapse" + cont + "' class='collapse' role='tabpanel' aria-labelledby=heading" + cont + " >");
-                                  out.println("<div class='card-block'>");
-                                    out.println("lalalalalalalala");
+                                  out.println("<div class='card-block text-center'>");                                    
+                                    out.println("<span class='pr-3'><a role='button' class='btn btn-default btn-lg'><i class='fa fa-play' aria-hidden='true'></i></a></span>");
+                                    out.println("<span class='pr-3'><a role='button' class='btn btn-default btn-lg'><i class='fa fa-stop' aria-hidden='true'></i></a></span>");
                                     out.println("</div>");
                                     out.println("</div>");
                                     out.println("</div>");
