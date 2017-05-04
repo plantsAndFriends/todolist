@@ -50,7 +50,7 @@ public class ControlLogin extends HttpServlet {
                     RequestDispatcher rd = request.getRequestDispatcher("app.jsp");
                     rd.forward(request, response);
                 } else {
-                    request.getSession().setAttribute("messLogin", "We're sorry! Wrong authentication!");
+                    request.getSession().setAttribute("mssLogin", "We're sorry! Wrong authentication!");
                     response.sendRedirect(request.getHeader("referer"));
 //                    out.println("We're sorry! Wrong authentication!");
 //                    out.println("<a href='signin.jsp'><button>Try again</button></a>");

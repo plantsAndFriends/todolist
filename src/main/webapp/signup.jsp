@@ -39,7 +39,7 @@
         </div>
         <div class="container mt-5">
             <h1 class="text-center pt-5">Sign up to Todolist</h1>
-            <div class="row">
+            <div class="row mt-2">
                 <div class="col-md-6 offset-3">
                     <%
                         if (session.getAttribute("mssUser") != null) {
