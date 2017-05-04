@@ -21,6 +21,11 @@ public class BeanUser implements Serializable {
         
     }
     
+    public BeanUser(int id, String username){
+        this.id = id;
+        this.username = username;
+    }
+    
     public int getId() {
         return id;
     }

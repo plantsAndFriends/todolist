@@ -59,25 +59,25 @@ public class DAOUser extends Bd {
         return valid;
     }
 
-    public String getUserByEmail(String email, String password) {
+    public BeanUser getUserByEmail(String email) {
         String username = "";
-
+        int id = 0;
         try {
 
-            PreparedStatement pst = conn.prepareStatement("SELECT username FROM user WHERE email = ? and password = ?");
+            PreparedStatement pst = conn.prepareStatement("SELECT username, id FROM user WHERE email = ?");
 
-            pst.setString(1, email);
-            pst.setString(2, password);
+            pst.setString(1, email);            
 
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
                 username = rs.getString("username");
+                id = rs.getInt("id");
             }
         } catch (Exception e) {
             System.out.println("");
         }
 
-        return username;
+        return new BeanUser(id, username);
     }
 
 }

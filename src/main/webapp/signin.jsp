@@ -51,32 +51,42 @@
             %>--%>
             <h1 class="text-center pt-5 mb-5">Sign in to Todolist</h1>
 
+            <%
+                if (session.getAttribute("mssLogin") != null) {
+                    out.print("<div class='alert alert-danger'>");
+                    out.print(session.getAttribute("mssLogin"));
+                    out.print("</div>");
+                    session.removeAttribute("mssLogin");
+                }
+
+            %>
+
             <% if (request.getParameter("email") == null) { %>
 
-                <form class="form-horizontal" method="post">
-                    <div class="form-group">
-                        <div class="input-group col-md-4 offset-4">
-                            <span class="input-group-addon">@</span>
-                            <input type="text" class="form-control" name="email" placeholder="Your email" required />
-                        </div>
+            <form class="form-horizontal" method="post">
+                <div class="form-group">
+                    <div class="input-group col-md-4 offset-4">
+                        <span class="input-group-addon">@</span>
+                        <input type="text" class="form-control" name="email" placeholder="Your email" required />
                     </div>
-                    <div class="form-group">
-                        <div class="input-group col-md-4 offset-4">
-                            <span class="input-group-addon"><i class="fa fa-key" aria-hidden="true"></i></span>
-                            <input type="password" class="form-control" name="password"  placeholder="Your password" required />
-                        </div>
-                    </div>            
-                    <div class="form-group mt-5">
-                        <div class="col-md-4 offset-4">
-                            <button class="btn btn-success" value="signin">Sign in</button>
-                        </div>                    
+                </div>
+                <div class="form-group">
+                    <div class="input-group col-md-4 offset-4">
+                        <span class="input-group-addon"><i class="fa fa-key" aria-hidden="true"></i></span>
+                        <input type="password" class="form-control" name="password"  placeholder="Your password" required />
                     </div>
-                </form> 
-            
+                </div>            
+                <div class="form-group mt-5">
+                    <div class="col-md-4 offset-4">
+                        <button class="btn btn-success" value="signin">Sign in</button>
+                    </div>                    
+                </div>
+            </form> 
+
             <% } else { %>
-                <jsp:forward page="ControlLogin?action=loginUser"/> 
-            <% } %>
-            
+            <jsp:forward page="ControlLogin?action=loginUser"/> 
+            <% }%>
+
         </div>
 
         <!--<div class="error">

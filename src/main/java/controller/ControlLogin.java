@@ -45,12 +45,15 @@ public class ControlLogin extends HttpServlet {
             if (op.equals("loginUser")) {
                 BeanUser user = (BeanUser) request.getAttribute("bean_signin");
                 if (access.validateUser(user)) {
-                    request.getSession().setAttribute("sessuser", access.getUserByEmail(user.getEmail(), user.getPassword()));
+                    request.getSession().setAttribute("sessusername", access.getUserByEmail(user.getEmail()).getUsername());
+                    request.getSession().setAttribute("sessid", access.getUserByEmail(user.getEmail()).getId());
                     RequestDispatcher rd = request.getRequestDispatcher("app.jsp");
                     rd.forward(request, response);
                 } else {
-                    out.println("We're sorry! Wrong authentication!");
-                    out.println("<a href='signin.jsp'><button>Try again</button></a>");
+                    request.getSession().setAttribute("messLogin", "We're sorry! Wrong authentication!");
+                    response.sendRedirect(request.getHeader("referer"));
+//                    out.println("We're sorry! Wrong authentication!");
+//                    out.println("<a href='signin.jsp'><button>Try again</button></a>");
                 }
             } else {
                 if (op.equals("logout")) {

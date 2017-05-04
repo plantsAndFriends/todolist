@@ -33,18 +33,18 @@ public class ControlTask extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         try {
             PrintWriter out = response.getWriter();
             DAOTask access = new DAOTask();
             String op = request.getParameter("action");
             String req;
             int id;
-            
+
             switch (op) {
                 case "addTask":
                     if (request.getParameter("task") != null) {
-                        access.insertTask(request.getParameter("task"));
+                        access.insertTask(request.getParameter("task"), (int) request.getSession().getAttribute("sessid"));
                         RequestDispatcher rq = request.getRequestDispatcher("app.jsp");
                         rq.forward(request, response);
                     }
@@ -72,9 +72,7 @@ public class ControlTask extends HttpServlet {
                     id = Integer.parseInt(req);
                     access.pauseTask(id);
             }
-            
-            
-            
+
             /*if (op.equals("addTask")) {
                 if (request.getParameter("task") != null) {
                     access.insertTask(request.getParameter("task"));
@@ -93,7 +91,7 @@ public class ControlTask extends HttpServlet {
             System.out.println("Some kind of error happened when you were chillin'");
             throw new ServletException(e);
         }
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

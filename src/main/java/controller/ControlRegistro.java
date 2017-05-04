@@ -36,8 +36,7 @@ public class ControlRegistro extends HttpServlet {
         try {
             PrintWriter out = response.getWriter();
             DAOUser access = new DAOUser();
-            String op = request.getParameter("action");
-            String finalMessage = "";
+            String op = request.getParameter("action");            
             String messageUsername, messageEmail, messagePass;
 
             if (op.equals("insertUser")) {
@@ -46,29 +45,25 @@ public class ControlRegistro extends HttpServlet {
 
                 if (valid.validateUsername(user.getUsername()) && valid.validateMail(user.getEmail()) && valid.validatePassword(user.getPassword())) {
                     access.insertUser(user);
-                    request.getSession().setAttribute("sessuser", access.getUserByEmail(user.getEmail(), user.getPassword()));                    
+                    request.getSession().setAttribute("sessusername", access.getUserByEmail(user.getEmail()).getUsername());
+                    request.getSession().setAttribute("sessid", access.getUserByEmail(user.getEmail()).getId());
                     RequestDispatcher rd = request.getRequestDispatcher("app.jsp");
                     rd.forward(request, response);
                 } else {
                     if (!valid.validateUsername(user.getUsername())) {
-                        messageUsername = "Wrong username, try again";
-                        //finalMessage += messageUsername + "\r\n";
-                        //out.println("Username: " + user.getUsername());
+                        messageUsername = "Wrong username, try again";                        
                         request.getSession().setAttribute("mssUser", messageUsername);
                     }
                     if (!valid.validateMail(user.getEmail())) {
-                        messageEmail = "Wrong email, try again";
-                        //finalMessage += messageEmail + "\r\n";
+                        messageEmail = "Wrong email, try again";                        
                         request.getSession().setAttribute("mssEmail", messageEmail);
                     }
 
                     if (!valid.validatePassword(user.getPassword())) {
-                        messagePass = "Wrong password, try again";
-                        //finalMessage += messagePass + "\r\n";
+                        messagePass = "Wrong password, try again";                        
                         request.getSession().setAttribute("mssPass", messagePass);
                     }
-
-                    //request.getSession().setAttribute("messageErr", finalMessage);
+                    
                     response.sendRedirect(request.getHeader("referer"));
                     /*out.println("Enter valid data!");
                     out.println("<a href='signup.jsp'><button>Try again</button></a>");*/

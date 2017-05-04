@@ -30,12 +30,12 @@ public class DAOTask extends Bd {
         stmt = conn.createStatement();
     }
 
-    public void insertTask(String task) throws Exception {
-        stmt.executeUpdate("INSERT INTO task (task) VALUES ('" + task + "')");
+    public void insertTask(String task, int userId) throws Exception {
+        stmt.executeUpdate("INSERT INTO task (task, user_id) VALUES ('" + task + "','" + userId + "')");
     }
 
-    public ArrayList<BeanTask> getTasks() throws Exception {
-        ResultSet rs = stmt.executeQuery("SELECT * FROM task ORDER BY id");
+    public ArrayList<BeanTask> getTasks(int userId) throws Exception {
+        ResultSet rs = stmt.executeQuery("SELECT * FROM task WHERE user_id = " + userId + " ORDER BY id ");
 
         ArrayList<BeanTask> listTask = new ArrayList();
 
@@ -46,12 +46,13 @@ public class DAOTask extends Bd {
             String t = rs.getString("task");
             Date st = rs.getDate("startedAt");
             Date ct = rs.getDate("completedAt");
+            int uId = rs.getInt("user_id");
 
             task.setId(id);
             task.setTask(t);
             task.setStartedAt(st);
             task.setCompletedAt(ct);
-
+            task.setUser_id(uId);
             listTask.add(task);
         }
         return listTask;
@@ -61,12 +62,12 @@ public class DAOTask extends Bd {
     public void removeTask(int id) throws SQLException {
         stmt.executeUpdate("DELETE FROM task WHERE id = " + id);
     }
-    
+
     public void startTask(int id) throws SQLException {
         stmt.executeUpdate("UPDATE task SET startedAt = NOW() WHERE id = " + id);
     }
-    
-    public  void pauseTask(int id) throws SQLException {
+
+    public void pauseTask(int id) throws SQLException {
         stmt.executeUpdate("UPDATE task SET completedAt = NOW() WHERE id = " + id);
     }
 }

@@ -36,7 +36,7 @@
                                     /*String us = (String) request.getSession().getAttribute("sessuser");
                                     out.print(us);*/
                                 %>--%>
-                                <%= session.getAttribute("sessuser") %>
+                                <%= session.getAttribute("sessusername") %>
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="ControlLogin?action=logout">Logout</a>
@@ -70,7 +70,8 @@
                         <%
                             int cont = 0;
                             DAOTask task = new DAOTask();
-                            ArrayList<BeanTask> beanTask = task.getTasks();
+                            int id = Integer.parseInt(session.getAttribute("sessid").toString());
+                            ArrayList<BeanTask> beanTask = task.getTasks(id);
                             Collections.reverse(beanTask);
 
                             if (task != null) {

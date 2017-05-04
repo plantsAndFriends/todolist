@@ -17,6 +17,9 @@ public class BeanTask  implements Serializable {
     private String task;
     private Date startedAt;
     private Date completedAt;
+    private int user_id;
+
+    
 
     public BeanTask() {
     
@@ -54,6 +57,14 @@ public class BeanTask  implements Serializable {
         this.completedAt = completedAt;
     }
 
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
+    
     @Override
     public String toString() {
         return "BeanTask{" + "id=" + id + ", task=" + task + ", startedAt=" + startedAt + ", completedAt=" + completedAt + '}';
