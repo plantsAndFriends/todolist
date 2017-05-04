@@ -46,6 +46,7 @@ public class ControlRegistro extends HttpServlet {
 
                 if (valid.validateUsername(user.getUsername()) && valid.validateMail(user.getEmail()) && valid.validatePassword(user.getPassword())) {
                     access.insertUser(user);
+                    request.getSession().setAttribute("sessuser", access.getUserByEmail(user.getEmail(), user.getPassword()));                    
                     RequestDispatcher rd = request.getRequestDispatcher("app.jsp");
                     rd.forward(request, response);
                 } else {
