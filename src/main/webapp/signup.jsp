@@ -39,9 +39,35 @@
         </div>
         <div class="container mt-5">
             <h1 class="text-center pt-5">Sign up to Todolist</h1>
-            <% 
-               out.print(request.getAttribute("messageFinal"));
-            %>
+            <div class="row">
+                <div class="col-md-6 offset-3">
+                    <%
+                        if (session.getAttribute("mssUser") != null) {
+                            out.print("<div class='alert alert-danger'>");
+                            out.print(session.getAttribute("mssUser"));
+                            out.print("</div>");
+                            session.removeAttribute("mssUser");
+                        }
+
+                        if (session.getAttribute("mssEmail") != null) {
+                            out.print("<div class='alert alert-danger'>");
+                            out.print(session.getAttribute("mssEmail"));
+                            out.print("</div>");
+                            session.removeAttribute("mssEmail");
+
+                        }
+
+                        if (session.getAttribute("mssPass") != null) {
+                            out.print("<div class='alert alert-danger'>");
+                            out.print(session.getAttribute("mssPass"));
+                            out.print("</div>");
+                            session.removeAttribute("mssPass");
+
+                        }
+                    %>
+                </div>
+            </div>
+
 
             <% if (request.getParameter("username") == null) { %>      
             <form class="form-horizontal" method="post">

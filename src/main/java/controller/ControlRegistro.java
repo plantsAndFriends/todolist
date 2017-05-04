@@ -31,45 +31,44 @@ public class ControlRegistro extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("hola");
         response.setContentType("text/html;charset=UTF-8");
-        
+
         try {
             PrintWriter out = response.getWriter();
             DAOUser access = new DAOUser();
             String op = request.getParameter("action");
             String finalMessage = "";
-            
+            String messageUsername, messageEmail, messagePass;
 
             if (op.equals("insertUser")) {
                 BeanUser user = (BeanUser) request.getAttribute("bean_signup");
                 ValidatorUtil valid = new ValidatorUtil();
-                
+
                 if (valid.validateUsername(user.getUsername()) && valid.validateMail(user.getEmail()) && valid.validatePassword(user.getPassword())) {
                     access.insertUser(user);
                     RequestDispatcher rd = request.getRequestDispatcher("app.jsp");
                     rd.forward(request, response);
                 } else {
-                    
                     if (!valid.validateUsername(user.getUsername())) {
-                        String messageUsername = "Wrong username, try again";
-                        finalMessage += messageUsername + "\n\r";
+                        messageUsername = "Wrong username, try again";
+                        //finalMessage += messageUsername + "\r\n";
                         //out.println("Username: " + user.getUsername());
-
+                        request.getSession().setAttribute("mssUser", messageUsername);
                     }
                     if (!valid.validateMail(user.getEmail())) {
-                        String messageEmail = "Wrong email, try again";
-                        finalMessage += messageEmail + "\n\r";
+                        messageEmail = "Wrong email, try again";
+                        //finalMessage += messageEmail + "\r\n";
+                        request.getSession().setAttribute("mssEmail", messageEmail);
                     }
 
-                    if (!valid.validateMail(user.getPassword())) {
-                        String messagePass = "Wrong password, try again";
-                        finalMessage += messagePass + "\n\r";
+                    if (!valid.validatePassword(user.getPassword())) {
+                        messagePass = "Wrong password, try again";
+                        //finalMessage += messagePass + "\r\n";
+                        request.getSession().setAttribute("mssPass", messagePass);
                     }
 
-                    request.setAttribute("messageErr", finalMessage);
-                    RequestDispatcher rd = request.getRequestDispatcher("auxjsp.jsp");
-                    rd.forward(request, response);
+                    //request.getSession().setAttribute("messageErr", finalMessage);
+                    response.sendRedirect(request.getHeader("referer"));
                     /*out.println("Enter valid data!");
                     out.println("<a href='signup.jsp'><button>Try again</button></a>");*/
                 }
