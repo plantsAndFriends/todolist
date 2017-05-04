@@ -8,6 +8,7 @@
 <%@ page import="java.util.Iterator"%>
 <%@ page import="model.bd.DAOTask"%>
 <%@ page import="model.pojo.BeanTask"%>
+<%@ page import="model.pojo.BeanUser"%>
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList"%>
 <!DOCTYPE html>
@@ -35,7 +36,7 @@
                                     /*String us = (String) request.getSession().getAttribute("sessuser");
                                     out.print(us);*/
                                 %>--%>
-                                <%= session.getAttribute("username") %>
+                                <%= session.getAttribute("sessuser") %>
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="ControlLogin?action=logout">Logout</a>
