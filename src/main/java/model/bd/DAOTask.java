@@ -77,78 +77,44 @@ public class DAOTask extends Bd {
     public Date getStartedAt(int id) throws SQLException {
         /*ResultSet rs = stmt.executeQuery("SELECT startedAt FROM task WHERE id = " + id);
         return rs.getDate("startedAt");*/
-        
+
         Date start = null;
         String sql = "SELECT startedAt FROM task WHERE id = " + id;
         ResultSet rs = stmt.executeQuery(sql);
         while (rs.next()) {
-            start =  rs.getDate("startedAt");
+            start = rs.getTimestamp("startedAt");
         }
-        
+
+//        SimpleDateFormat dt = new SimpleDateFormat("yyyyy-MM-dd HH:mm:ss");
+//        long date_ns = start.getTime();
+        //System.out.println("Start -->" + dt.format(date_ns));
+        System.out.println(start);
         return start;
     }
 
     public Date getCompletedAt(int id) throws SQLException {
         /*ResultSet rs = stmt.executeQuery("SELECT completedAt FROM task WHERE id = " + id);
         return rs.getDate("completedAt");*/
-        
+
         Date pause = null;
         String sql = "SELECT completedAt FROM task WHERE id = " + id;
-        
+
         ResultSet rs = stmt.executeQuery(sql);
         while (rs.next()) {
-            pause =  rs.getDate("completedAt");
+            pause = rs.getTimestamp("completedAt");
         }
-        
+
         return pause;
     }
 
     public long totalTime(Date st, Date ct) { // retornarà algo        
         String start = st.toString();
         String completed = ct.toString();
-        
-        long diffSeconds = 0;
-        
-        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.ENGLISH);
-        
-        /*long diffMinutes = 0;
-        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-        Date d1 = null;
-        Date d2 = null;
-        try {
-            d1 = format.parse(start);
-            d2 = format.parse(completed);
-            
-            long diff = d2.getTime() - d1.getTime();
-            
-            diffMinutes = diff / (60 * 1000) % 60;
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        */
-        
-        Date d1 = null;
-        Date d2 = null;
-        
-        try {
-            d1 = format.parse(start); // Es queda aquí
-            System.out.println("d1: " + d1);
-            d2 = format.parse(completed);
-            
-            
-            // in milliseconds
-            long diff = d2.getTime() - d1.getTime();
-            System.out.println("diff: " + diff);
-            
-            diffSeconds = diff / 1000 % 60;
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        
-        
-        return diffSeconds;
-    }
 
+        long diff = ct.getTime() - st.getTime();
+        System.out.println("funciones diff?" + diff);
+        long diffMin = diff / (60 * 1000) % 60;
+                          
+        return diffMin;
+    }
 }
