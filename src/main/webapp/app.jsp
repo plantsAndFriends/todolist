@@ -95,9 +95,6 @@
                                                         // Done
                                                         out.println("<span class='pr-3'><a href='ControlTask?action=doneTask&id=" + ts.getId() + "'><i class='fa fa-check' aria-hidden='true'></i></a></span>");
 
-                                                        // Modify
-                                                        out.println("<span class='pr-3 push-sm-3'><i class='fa fa-pencil' aria-hidden='true'></i></span>");
-                                                        
                                                     out.println("</div>");                                                
                                             out.println("</h5>");
                                         out.println("</div>");
@@ -105,10 +102,10 @@
                                             out.println("<div class='card-block text-center'>");                                    
                                                 
                                                 // Start
-                                                out.println("<span class=''><a href='ControlTask?action=start&id=" + ts.getId() + "' role='button' class='btn btn-secondary play'><i class='fa fa-play' aria-hidden='true'></i></a></span>");
+                                                out.println("<span><a href='ControlTask?action=start&id=" + ts.getId() + "'><button type='button' class='btn btn-secondary play'><i class='fa fa-play' aria-hidden='true'></i></button></a></span>");
                                                 
                                                 // Pause
-                                                out.println("<span class=''><a href='ControlTask?action=pause&id=" +  ts.getId() + "' role='button' class='btn btn-secondary pause'><i class='fa fa-stop' aria-hidden='true'></i></a></span>");
+                                                out.println("<span><a href='ControlTask?action=pause&id=" +  ts.getId() + "'><button type='button' class='btn btn-secondary pause'><i class='fa fa-stop' aria-hidden='true'></i></button></a></span>");
                                             
                                                 out.println("<p id='totalTime'></p>");
                                             out.println("</div>");
@@ -135,9 +132,18 @@
                 $(this).parents('.card').addClass('animated fadeOutRight');
             });
             
-            $('.fa-trash').click(function (){
+            $('.fa-trash').click(function () {
                 $(this).parents('.card').addClass('animated zoomOut');
-            });                                   
-        </script>
+            });
+            
+            if ($('.play').data('clicked')) {
+                $('.pause').prop('disabled', true);
+                console.log("play");
+            }
+            
+            $('.pause').click(function () {
+               $('.play').prop('disabled', true);
+            });
+        </script>                                                        
     </body>
 </html>
