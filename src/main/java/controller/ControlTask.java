@@ -70,8 +70,9 @@ public class ControlTask extends HttpServlet {
                     Date start = access.getStartedAt(id);
                     Date pause = access.getCompletedAt(id);
                     long tt = access.totalTime(start, pause);
-                    request.getSession().setAttribute("time", tt);
-                    response.sendRedirect(request.getHeader("referer"));
+                    /*request.getSession().setAttribute("time", tt);
+                    response.sendRedirect(request.getHeader("referer"));*/
+                    System.out.println("tt: " + tt);
                     
             }
             RequestDispatcher rq = request.getRequestDispatcher("app.jsp");
