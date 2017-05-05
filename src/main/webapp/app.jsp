@@ -69,6 +69,7 @@
         <div class="container mt-5">
             <div class="row">
                 <div class="col-sm-8 offset-2">                    
+<<<<<<< HEAD
                     <%
                         int cont = 0;
                         DAOTask task = new DAOTask();
@@ -136,10 +137,27 @@
                 $(this).parents('.card-header').addClass('alert alert-success');
                 $(this).parents('.card').addClass('animated fadeOutRight');
             });
+<<<<<<< HEAD
 
             $('.fa-trash').click(function () {
                 $(this).parents('.card').addClass('animated zoomOut');
             });
         </script>
+=======
+            
+            $('.fa-trash').click(function () {
+                $(this).parents('.card').addClass('animated zoomOut');
+            });
+            
+            if ($('.play').data('clicked')) {
+                $('.pause').prop('disabled', true);
+                console.log("play");
+            }
+            
+            $('.pause').click(function () {
+               $('.play').prop('disabled', true);
+            });
+        </script>                                                        
+>>>>>>> 82da2b4941a727beec801abd5c75a0da98a96935
     </body>
 </html>
