@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import model.pojo.BeanTask;
@@ -69,5 +70,39 @@ public class DAOTask extends Bd {
 
     public void pauseTask(int id) throws SQLException {
         stmt.executeUpdate("UPDATE task SET completedAt = NOW() WHERE id = " + id);
+    }
+
+    public Date getStartedAt(int id) throws SQLException {
+        ResultSet rs = stmt.executeQuery("SELECT startedAt FROM task WHERE id = " + id);
+        return rs.getDate("startedAt");
+    }
+
+    public Date getCompletedAt(int id) throws SQLException {
+        ResultSet rs = stmt.executeQuery("SELECT completedAt FROM task WHERE id = " + id);
+        return rs.getDate("completedAt");
+    }
+
+    public long totalTime(Date st, Date ct) { // retornarà algo        
+        String start = st.toString();
+        String complet = ct.toString();
+        long diffMinutes = 0;
+        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+        Date d1 = null;
+        Date d2 = null;
+        try {
+            d1 = format.parse(start);
+            d2 = format.parse(complet);
+            
+            long diff = d2.getTime() - d1.getTime();
+            
+            diffMinutes = diff / (60 * 1000) % 60;
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return diffMinutes;
+        // Canviar-ho per SELECT's directament
+        // Enllaç per la diferència entre hores en Java: https://www.mkyong.com/java/how-to-calculate-date-time-difference-in-java/
     }
 }

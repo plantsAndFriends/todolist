@@ -7,6 +7,7 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -37,6 +38,7 @@ public class ControlTask extends HttpServlet {
         try {
             PrintWriter out = response.getWriter();
             DAOTask access = new DAOTask();
+            BeanTask task = new BeanTask();
             String op = request.getParameter("action");
 
             String req;
@@ -64,6 +66,13 @@ public class ControlTask extends HttpServlet {
                     break;
                 case "pause":
                     access.pauseTask(id);
+                    //access.totalTime();
+                    Date start = access.getStartedAt(id);
+                    Date pause = access.getCompletedAt(id);
+                    long tt = access.totalTime(start, pause);
+                    request.getSession().setAttribute("time", tt);
+                    response.sendRedirect(request.getHeader("referer"));
+                    
             }
             RequestDispatcher rq = request.getRequestDispatcher("app.jsp");
             rq.forward(request, response);
