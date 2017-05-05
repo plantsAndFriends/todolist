@@ -47,6 +47,7 @@ public class ControlRegistro extends HttpServlet {
                     access.insertUser(user);
                     request.getSession().setAttribute("sessusername", access.getUserByEmail(user.getEmail()).getUsername());
                     request.getSession().setAttribute("sessid", access.getUserByEmail(user.getEmail()).getId());
+                    
                     RequestDispatcher rd = request.getRequestDispatcher("app.jsp");
                     rd.forward(request, response);
                 } else {
@@ -64,9 +65,7 @@ public class ControlRegistro extends HttpServlet {
                         request.getSession().setAttribute("mssPass", messagePass);
                     }
                     
-                    response.sendRedirect(request.getHeader("referer"));
-                    /*out.println("Enter valid data!");
-                    out.println("<a href='signup.jsp'><button>Try again</button></a>");*/
+                    response.sendRedirect(request.getHeader("referer"));                   
                 }
 
             }

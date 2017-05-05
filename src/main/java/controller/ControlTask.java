@@ -66,12 +66,15 @@ public class ControlTask extends HttpServlet {
                     break;
                 case "pause":
                     access.pauseTask(id);
-                    //access.totalTime();
+                    
                     Date start = access.getStartedAt(id);
                     Date pause = access.getCompletedAt(id);
+                    
                     long tt = access.totalTime(start, pause);
-                    /*request.getSession().setAttribute("time", tt);
-                    response.sendRedirect(request.getHeader("referer"));*/
+                    
+                    request.setAttribute("time", tt);
+                    //request.getSession().setAttribute("time", tt);
+                    //response.sendRedirect(request.getHeader("referer"));
                     System.out.println("tt: " + tt);
                     
             }

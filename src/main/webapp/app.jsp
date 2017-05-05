@@ -62,65 +62,67 @@
                     </span>
                 </div>
             </form>
-           
+
 
         </div>        
 
         <div class="container mt-5">
             <div class="row">
                 <div class="col-sm-8 offset-2">                    
-                        <%
-                            int cont = 0;
-                            DAOTask task = new DAOTask();
-                            int id = Integer.parseInt(session.getAttribute("sessid").toString());
-                            ArrayList<BeanTask> beanTask = task.getTasks(id);
-                            Collections.reverse(beanTask);
+                    <%
+                        int cont = 0;
+                        DAOTask task = new DAOTask();
+                        int id = Integer.parseInt(session.getAttribute("sessid").toString());
+                        ArrayList<BeanTask> beanTask = task.getTasks(id);
+                        Collections.reverse(beanTask);
 
-                            if (task != null) {
-                                out.println("<div id='accordion' role='tablist' aria-multiselectable='true' class='text-center'>");
-                                for (BeanTask ts : beanTask) { 
-                                    out.println("<div class='card mb-2'>"); 
-                                        out.println("<div class='card-header' role='tab' id=heading" + cont + " >");
-                                            out.println("<h5>");
-                                                if(session.getAttribute("time")!=null){
-                                                   out.print("<span class='pull-left'>"+session.getAttribute("time").toString()+"</span>");
-                                                   session.removeAttribute("time");
-                                                }                                         
-                                                out.println("<div class='d-flex justify-content-center'><a class='collapsed' data-toggle='collapse' data-parent='#accordion' href='#collapse" + cont + "' aria-expanded='false' aria-controls='collapse" + cont + "' >" + ts.getTask()+ "</a></div>");
-                                                    out.println("<div class='d-flex flex-row-reverse'>");
-                                                    
-                                                        // Trash
-                                                        out.println("<span><a href='ControlTask?action=removeTask&id=" + ts.getId() + "'><i class='fa fa-trash' aria-hidden='true'></i></a></span>");
-
-                                                        // Done
-                                                        out.println("<span class='pr-3'><a href='ControlTask?action=doneTask&id=" + ts.getId() + "'><i class='fa fa-check' aria-hidden='true'></i></a></span>");
-
-                                                        // Modify
-                                                        out.println("<span class='pr-3 push-sm-3'><i class='fa fa-pencil' aria-hidden='true'></i></span>");
-                                                        
-                                                    out.println("</div>");                                                
-                                            out.println("</h5>");
-                                        out.println("</div>");
-                                        out.println("<div id='collapse" + cont + "' class='collapse' role='tabpanel' aria-labelledby=heading" + cont + " >");
-                                            out.println("<div class='card-block text-center'>");                                    
-                                                
-                                                // Start
-                                                out.println("<span class=''><a href='ControlTask?action=start&id=" + ts.getId() + "' role='button' class='btn btn-secondary play'><i class='fa fa-play' aria-hidden='true'></i></a></span>");
-                                                
-                                                // Pause
-                                                out.println("<span class=''><a href='ControlTask?action=pause&id=" +  ts.getId() + "' role='button' class='btn btn-secondary pause'><i class='fa fa-stop' aria-hidden='true'></i></a></span>");
-                                            
-                                                out.println("<p id='totalTime'></p>");
-                                            out.println("</div>");
-                                        out.println("</div>");                                                                          
-                                   out.println("</div>");
-
-                                    cont++;
+                        if (task != null) {
+                            out.println("<div id='accordion' role='tablist' aria-multiselectable='true' class='text-center'>");
+                            for (BeanTask ts : beanTask) {
+                                out.println("<div class='card mb-2'>");
+                                out.println("<div class='card-header' role='tab' id=heading" + cont + " >");
+                                out.println("<h5>");
+                                if (request.getAttribute("time") != null) {
+                                    out.print("<span class='pull-left'>" + request.getAttribute("time") + "</span>");
+                                    request.removeAttribute("time");
+                                }else{
+                                    out.print("<span class='pull-left'> In progress... </span>");
                                 }
+                                out.println("<div class='d-flex justify-content-center'><a class='collapsed' data-toggle='collapse' data-parent='#accordion' href='#collapse" + cont + "' aria-expanded='false' aria-controls='collapse" + cont + "' >" + ts.getTask() + "</a></div>");
+                                out.println("<div class='d-flex flex-row-reverse'>");
+
+                                // Trash
+                                out.println("<span><a href='ControlTask?action=removeTask&id=" + ts.getId() + "'><i class='fa fa-trash' aria-hidden='true'></i></a></span>");
+
+                                // Done
+                                out.println("<span class='pr-3'><a href='ControlTask?action=doneTask&id=" + ts.getId() + "'><i class='fa fa-check' aria-hidden='true'></i></a></span>");
+
+                                // Modify
+                                out.println("<span class='pr-3 push-sm-3'><i class='fa fa-pencil' aria-hidden='true'></i></span>");
 
                                 out.println("</div>");
+                                out.println("</h5>");
+                                out.println("</div>");
+                                out.println("<div id='collapse" + cont + "' class='collapse' role='tabpanel' aria-labelledby=heading" + cont + " >");
+                                out.println("<div class='card-block text-center'>");
+
+                                // Start
+                                out.println("<span class=''><a href='ControlTask?action=start&id=" + ts.getId() + "' role='button' class='btn btn-secondary play'><i class='fa fa-play' aria-hidden='true'></i></a></span>");
+
+                                // Pause
+                                out.println("<span class=''><a href='ControlTask?action=pause&id=" + ts.getId() + "' role='button' class='btn btn-secondary pause'><i class='fa fa-stop' aria-hidden='true'></i></a></span>");
+
+                                out.println("<p id='totalTime'></p>");
+                                out.println("</div>");
+                                out.println("</div>");
+                                out.println("</div>");
+
+                                cont++;
                             }
-                        %>                    
+
+                            out.println("</div>");
+                        }
+                    %>                    
                 </div>
             </div>
         </div>
@@ -130,14 +132,14 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
 
         <script>
-            $('.fa-check').click(function () {                
+            $('.fa-check').click(function () {
                 $(this).parents('.card-header').addClass('alert alert-success');
                 $(this).parents('.card').addClass('animated fadeOutRight');
             });
-            
-            $('.fa-trash').click(function (){
+
+            $('.fa-trash').click(function () {
                 $(this).parents('.card').addClass('animated zoomOut');
-            });                                   
+            });
         </script>
     </body>
 </html>
