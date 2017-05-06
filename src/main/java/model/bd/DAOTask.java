@@ -75,19 +75,12 @@ public class DAOTask extends Bd {
     }
 
     public Date getStartedAt(int id) throws SQLException {
-        /*ResultSet rs = stmt.executeQuery("SELECT startedAt FROM task WHERE id = " + id);
-        return rs.getDate("startedAt");*/
-
         Date start = null;
         String sql = "SELECT startedAt FROM task WHERE id = " + id;
         ResultSet rs = stmt.executeQuery(sql);
         while (rs.next()) {
             start = rs.getTimestamp("startedAt");
         }
-
-//        SimpleDateFormat dt = new SimpleDateFormat("yyyyy-MM-dd HH:mm:ss");
-//        long date_ns = start.getTime();
-        //System.out.println("Start -->" + dt.format(date_ns));
         System.out.println(start);
         return start;
     }
