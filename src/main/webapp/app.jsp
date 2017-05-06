@@ -69,7 +69,6 @@
         <div class="container mt-5">
             <div class="row">
                 <div class="col-sm-8 offset-2">                    
-<<<<<<< HEAD
                     <%
                         int cont = 0;
                         DAOTask task = new DAOTask();
@@ -97,9 +96,7 @@
 
                                 // Done
                                 out.println("<span class='pr-3'><a href='ControlTask?action=doneTask&id=" + ts.getId() + "'><i class='fa fa-check' aria-hidden='true'></i></a></span>");
-
-                                // Modify
-                                out.println("<span class='pr-3 push-sm-3'><i class='fa fa-pencil' aria-hidden='true'></i></span>");
+                               
 
                                 out.println("</div>");
                                 out.println("</h5>");
@@ -111,7 +108,7 @@
                                 out.println("<span class=''><a href='ControlTask?action=start&id=" + ts.getId() + "' role='button' class='btn btn-secondary play'><i class='fa fa-play' aria-hidden='true'></i></a></span>");
 
                                 // Pause
-                                out.println("<span class=''><a href='ControlTask?action=pause&id=" + ts.getId() + "' role='button' class='btn btn-secondary pause'><i class='fa fa-stop' aria-hidden='true'></i></a></span>");
+                                out.println("<span class=''><a href='ControlTask?action=pause&id=" + ts.getId() + "' role='button' class='btn btn-secondary pause' disabled><i class='fa fa-stop' aria-hidden='true'></i></a></span>");
 
                                 out.println("<p id='totalTime'></p>");
                                 out.println("</div>");
@@ -137,13 +134,6 @@
                 $(this).parents('.card-header').addClass('alert alert-success');
                 $(this).parents('.card').addClass('animated fadeOutRight');
             });
-<<<<<<< HEAD
-
-            $('.fa-trash').click(function () {
-                $(this).parents('.card').addClass('animated zoomOut');
-            });
-        </script>
-=======
             
             $('.fa-trash').click(function () {
                 $(this).parents('.card').addClass('animated zoomOut');
@@ -158,6 +148,5 @@
                $('.play').prop('disabled', true);
             });
         </script>                                                        
->>>>>>> 82da2b4941a727beec801abd5c75a0da98a96935
     </body>
 </html>
