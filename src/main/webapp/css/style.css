@@ -13,6 +13,10 @@ and open the template in the editor.
     font-size: 13px;
 }
 
+.collapse {
+    float: right!important;
+}
+
 .navbar-brand {
     color: rgba(0, 0, 0, 0.5)!important;
 }
@@ -25,9 +29,6 @@ and open the template in the editor.
     color: white!important;
 }
 
-.fa-pencil{
-    color: #f0ad4e !important;
-}
 .fa-check{
     color: #5cb85c !important;
 }
