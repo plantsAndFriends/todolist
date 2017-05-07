@@ -95,7 +95,7 @@
                                 out.println("</h5>");
                                 out.println("</div>");
                                 out.println("<div id='collapse" + cont + "' class='collapse' role='tabpanel' aria-labelledby=heading" + cont + " >");
-                                out.println("<div class='card-block text-center'>");
+                                out.println("<div id='task" + ts.getId() + "' class='card-block text-center'>");
 
                                 // Start
                                 //out.println("<span class=''><a href='ControlTask?action=start&id=" + ts.getId() + "'><button class='btn btn-secondary play'><i class='fa fa-play' aria-hidden='true'></i></button></a></span>");
@@ -139,13 +139,13 @@
             
             function getStartedAt(id){
                 $.get("ControlTask?action=start&id="+id, function(data, status){
-                    alert(data);
-                    $('.play').prop('disabled', true);
-                    $('.pause').prop('disabled', false);
+                    //alert(data);
+                    $('#task'+id+' .play').prop('disabled', true);
+                    $('#task'+id+' .pause').prop('disabled', false);
                 });
             }
 
-            $('.play').click(function () {
+            //$('.play').click(function () {
                 /*var getParameter = function getParameter(param) {
                  var url = decodeURIComponent(window.location.search.substring(1)),
                  variables = url.split('&'),
@@ -162,7 +162,7 @@
                  }*/
 
 
-                alert(id);
+               // alert(id);
                 /*$.ajax({
                  url: 'http://localhost:8080/provatodolistCopy/ControlTask?action=getStarted&id='+id;
                  success: function(response) {
@@ -170,7 +170,7 @@
                  }
                  });*/
                 //$('.pause').prop('disabled', false);
-            });
+           // });
 
             /*if ($('.play').data('clicked')) {
              $('.pause').prop('disabled', true);

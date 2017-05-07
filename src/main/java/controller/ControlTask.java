@@ -73,6 +73,9 @@ public class ControlTask extends HttpServlet {
                     long tt = access.totalTime(start, pause);
                     
                     request.setAttribute("time", tt);
+                    /*response.setContentType("text/plain");
+                    response.setCharacterEncoding(("UTF-8"));
+                    response.getWriter().write(op);*/
                     //request.getSession().setAttribute("time", tt);
                     //response.sendRedirect(request.getHeader("referer"));
                     break;
