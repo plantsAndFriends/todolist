@@ -101,7 +101,7 @@
                                 //out.println("<span class=''><a href='ControlTask?action=start&id=" + ts.getId() + "'><button class='btn btn-secondary play'><i class='fa fa-play' aria-hidden='true'></i></button></a></span>");
                                 out.println("<span class=''><button onclick='getStartedAt("+ts.getId()+")' class='btn btn-secondary play'><i class='fa fa-play' aria-hidden='true'></i></button></a></span>");
                                 // Pause                               
-                                out.println("<span class=''><a href='ControlTask?action=pause&id=" + ts.getId() + "' role='button' class='btn btn-secondary pause' disabled><i class='fa fa-stop' aria-hidden='true'></i></a></span>");
+                                out.println("<span class=''><a href='ControlTask?action=pause&id=" + ts.getId() + "'><button class='btn btn-secondary pause'><i class='fa fa-stop' aria-hidden='true'></i></button></a></span>");
 
                                 out.println("<p id='totalTime'></p>");
                                 out.println("</div>");
@@ -123,6 +123,11 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
 
         <script>
+            
+            $(document).ready(function () {
+               $('.pause').prop('disabled', true);
+            });
+            
             $('.fa-check').click(function () {
                 $(this).parents('.card-header').addClass('alert alert-success');
                 $(this).parents('.card').addClass('animated fadeOutRight');
@@ -135,6 +140,8 @@
             function getStartedAt(id){
                 $.get("ControlTask?action=start&id="+id, function(data, status){
                     alert(data);
+                    $('.play').prop('disabled', true);
+                    $('.pause').prop('disabled', false);
                 });
             }
 
