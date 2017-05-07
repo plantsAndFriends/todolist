@@ -73,23 +73,19 @@
                         if (task != null) {
                             out.println("<div id='accordion' role='tablist' aria-multiselectable='true' class='text-center'>");
                             for (BeanTask ts : beanTask) {
-                                out.println("<div class='card mb-2'>");
-                                out.println("<div class='card-header' role='tab' id=heading" + cont + " >");
+                                out.println("<div id='card"+ts.getId()+"' class='card mb-2'>");
+                                out.println("<div id='card-header"+ts.getId()+" 'class='card-header' role='tab' id=heading" + cont + " >");
                                 out.println("<h5>");
-                                if (request.getAttribute("time") != null) {
-                                    out.print("<span class='pull-left'>" + request.getAttribute("time") + "</span>");
-                                    request.removeAttribute("time");
-                                } else {
-                                    out.println("<span class='test'></span>");
-                                }
+                                out.println("<span class='pull-left' id='time" + ts.getId() + "' ></span>");
                                 out.println("<div class='d-flex justify-content-center'><a class='collapsed' data-toggle='collapse' data-parent='#accordion' href='#collapse" + cont + "' aria-expanded='false' aria-controls='collapse" + cont + "' >" + ts.getTask() + "</a></div>");
                                 out.println("<div class='d-flex flex-row-reverse'>");
 
                                 // Trash
-                                out.println("<span><a href='ControlTask?action=removeTask&id=" + ts.getId() + "'><i class='fa fa-trash' aria-hidden='true'></i></a></span>");
-
+                                //out.println("<span><a href='ControlTask?action=removeTask&id=" + ts.getId() + "'><i class='fa fa-trash' aria-hidden='true'></i></a></span>");
+                                out.println("<span><button onclick='trash(" + ts.getId() + ")' class='btn btn-default' ><i class='fa fa-trash' aria-hidden='true'></i></button></span>");
                                 // Done
-                                out.println("<span class='pr-3'><a href='ControlTask?action=doneTask&id=" + ts.getId() + "'><i class='fa fa-check' aria-hidden='true'></i></a></span>");
+                                //out.println("<span class='pr-3'><a href='ControlTask?action=doneTask&id=" + ts.getId() + "'><i class='fa fa-check' aria-hidden='true'></i></a></span>");
+                                out.println("<span class='pr-3'><button onclick='done(" + ts.getId() + ")' class='btn btn-default' ><i class='fa fa-check' aria-hidden='true'></i></button></span>");
 
                                 out.println("</div>");
                                 out.println("</h5>");
@@ -99,10 +95,10 @@
 
                                 // Start
                                 //out.println("<span class=''><a href='ControlTask?action=start&id=" + ts.getId() + "'><button class='btn btn-secondary play'><i class='fa fa-play' aria-hidden='true'></i></button></a></span>");
-                                out.println("<span class=''><button onclick='getStartedAt("+ts.getId()+")' class='btn btn-secondary play'><i class='fa fa-play' aria-hidden='true'></i></button></a></span>");
+                                out.println("<span class=''><button onclick='play(" + ts.getId() + ")' class='btn btn-secondary play'><i class='fa fa-play' aria-hidden='true'></i></button></a></span>");
                                 // Pause                               
-                                out.println("<span class=''><a href='ControlTask?action=pause&id=" + ts.getId() + "'><button class='btn btn-secondary pause'><i class='fa fa-stop' aria-hidden='true'></i></button></a></span>");
-
+                                //out.println("<span class=''><a href='ControlTask?action=pause&id=" + ts.getId() + "'><button class='btn btn-secondary pause'><i class='fa fa-stop' aria-hidden='true'></i></button></a></span>");
+                                out.println("<span class=''><button onclick='pause(" + ts.getId() + ")' class='btn btn-secondary pause'><i class='fa fa-stop' aria-hidden='true'></i></button></a></span>");
                                 out.println("<p id='totalTime'></p>");
                                 out.println("</div>");
                                 out.println("</div>");
@@ -123,54 +119,75 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
 
         <script>
-            
+
             $(document).ready(function () {
-               $('.pause').prop('disabled', true);
-            });
-            
-            $('.fa-check').click(function () {
-                $(this).parents('.card-header').addClass('alert alert-success');
-                $(this).parents('.card').addClass('animated fadeOutRight');
+                $('.pause').prop('disabled', true);
             });
 
-            $('.fa-trash').click(function () {
-                $(this).parents('.card').addClass('animated zoomOut');
-            });
-            
-            function getStartedAt(id){
-                $.get("ControlTask?action=start&id="+id, function(data, status){
+            /*$('.fa-check').click(function () {
+             $(this).parents('.card-header').addClass('alert alert-success');
+             $(this).parents('.card').addClass('animated fadeOutRight');
+             });*/
+
+            /*$('.fa-trash').click(function () {
+             $(this).parents('.card').addClass('animated zoomOut');
+             });*/
+
+            function play(id) {
+                $.get("ControlTask?action=start&id=" + id, function (data, status) {
                     //alert(data);
-                    $('#task'+id+' .play').prop('disabled', true);
-                    $('#task'+id+' .pause').prop('disabled', false);
+                    $('#task' + id + ' .play').prop('disabled', true);
+                    $('#task' + id + ' .pause').prop('disabled', false);
+                });
+            }
+
+            function pause(id) {
+                $.get("ControlTask?action=pause&id=" + id, function (data, status) {
+                    $("#time" + id).html(data + " min");
+                    $('#task' + id + ' .pause').prop('disabled', true);
+                    $('.play').prop('disabled', false);
+                });
+            }
+
+            function done(id) {
+                $.get("ControlTask?action=doneTask&id=" + id, function (data, status) {
+                    $("#card-header"+id).addClass('alert alert-success');
+                    $("#card" + id).addClass('animated fadeOutRight');
+                });
+            }
+
+            function trash(id) {
+                $.get("ControlTask?action=removeTask&id=" + id, function (data, status) {
+                    $("#card" + id).addClass('animated zoomOut');
                 });
             }
 
             //$('.play').click(function () {
-                /*var getParameter = function getParameter(param) {
-                 var url = decodeURIComponent(window.location.search.substring(1)),
-                 variables = url.split('&'),
-                 paramName,
-                 i;
-                 
-                 for (i = 0; i < variables.length; i++) {
-                 paramName = variables[i].split('=');
-                 
-                 if (paramName[0] === param) {
-                 return paramName[1] === undefined ? true : paramName[1];
-                 }
-                 }
-                 }*/
+            /*var getParameter = function getParameter(param) {
+             var url = decodeURIComponent(window.location.search.substring(1)),
+             variables = url.split('&'),
+             paramName,
+             i;
+             
+             for (i = 0; i < variables.length; i++) {
+             paramName = variables[i].split('=');
+             
+             if (paramName[0] === param) {
+             return paramName[1] === undefined ? true : paramName[1];
+             }
+             }
+             }*/
 
 
-               // alert(id);
-                /*$.ajax({
-                 url: 'http://localhost:8080/provatodolistCopy/ControlTask?action=getStarted&id='+id;
-                 success: function(response) {
-                 alert(id);
-                 }
-                 });*/
-                //$('.pause').prop('disabled', false);
-           // });
+            // alert(id);
+            /*$.ajax({
+             url: 'http://localhost:8080/provatodolistCopy/ControlTask?action=getStarted&id='+id;
+             success: function(response) {
+             alert(id);
+             }
+             });*/
+            //$('.pause').prop('disabled', false);
+            // });
 
             /*if ($('.play').data('clicked')) {
              $('.pause').prop('disabled', true);

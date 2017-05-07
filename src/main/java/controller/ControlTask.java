@@ -34,7 +34,7 @@ public class ControlTask extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-                        
+
         try {
             PrintWriter out = response.getWriter();
             DAOTask access = new DAOTask();
@@ -48,43 +48,59 @@ public class ControlTask extends HttpServlet {
                 req = request.getParameter("id");
                 id = Integer.parseInt(req);
             }
-            switch (op) {
-                case "addTask":
-                    if (request.getParameter("task") != null) {
-                        access.insertTask(request.getParameter("task"), Integer.parseInt(request.getSession().getAttribute("sessid").toString()));
-                    }
-                    break;
-                case "removeTask":
-                    access.removeTask(id);
-                    break;
-                case "doneTask":
-                    Thread.sleep(100); // sleep
-                    access.removeTask(id);
-                    break;
-                case "start":
-                    access.startTask(id);
-                    break;
-                case "pause":
-                    access.pauseTask(id);
-                    
-                    Date start = access.getStartedAt(id);
-                    Date pause = access.getCompletedAt(id);
-                    
-                    long tt = access.totalTime(start, pause);
-                    
-                    request.setAttribute("time", tt);
-                    /*response.setContentType("text/plain");
+            if (op.equals("addTask") || op.equals("removeTask") || op.equals("doneTask") || op.equals("start")) {
+                switch (op) {
+                    case "addTask":
+                        if (request.getParameter("task") != null) {
+                            access.insertTask(request.getParameter("task"), Integer.parseInt(request.getSession().getAttribute("sessid").toString()));
+                        }
+                        break;
+                    case "removeTask":
+                        access.removeTask(id);
+                        break;
+                    case "doneTask":
+                        Thread.sleep(100); // sleep
+                        access.removeTask(id);
+                        break;
+                    case "start":
+                        access.startTask(id);
+                        break;
+                    /*case "pause":
+                        access.pauseTask(id);
+
+                        Date start = access.getStartedAt(id);
+                        Date pause = access.getCompletedAt(id);
+
+                        long tt = access.totalTime(start, pause);
+
+                        request.setAttribute("time", tt);
+                        response.setContentType("text/plain");
                     response.setCharacterEncoding(("UTF-8"));
                     response.getWriter().write(op);*/
-                    //request.getSession().setAttribute("time", tt);
-                    //response.sendRedirect(request.getHeader("referer"));
-                    break;
-                case "getStarted":
-                    access.getStartedAt(id);
-                    
+                        //request.getSession().setAttribute("time", tt);
+                        //response.sendRedirect(request.getHeader("referer"));
+//                        break;
+
+                }
+                RequestDispatcher rq = request.getRequestDispatcher("app.jsp");
+                rq.forward(request, response);
+            } else {
+                access.pauseTask(id);
+
+                Date start = access.getStartedAt(id);
+                Date pause = access.getCompletedAt(id);
+
+                long tt = access.totalTime(start, pause);
+                String aux = Long.toString(tt);
+                
+
+                response.setContentType("text/plain");
+                response.setCharacterEncoding(("UTF-8"));
+                response.getWriter().write(aux);
             }
-            RequestDispatcher rq = request.getRequestDispatcher("app.jsp");
-            rq.forward(request, response);
+
+//            RequestDispatcher rq = request.getRequestDispatcher("app.jsp");
+//            rq.forward(request, response);
         } catch (Exception e) {
             System.out.println("Some kind of error happened when you were chillin'");
             throw new ServletException(e);
@@ -130,6 +146,5 @@ public class ControlTask extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }
-    
-}
 
+}
