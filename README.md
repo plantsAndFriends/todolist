@@ -1,6 +1,6 @@
 # Todolist
 
-Todolist is the simplest to-do list web aplication
+Todolist is the simplest to-do list web application
 
 ## What we offer
 You, as a user, can:
