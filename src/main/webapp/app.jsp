@@ -80,7 +80,7 @@
                                     out.print("<span class='pull-left'>" + request.getAttribute("time") + "</span>");
                                     request.removeAttribute("time");
                                 } else {
-                                    out.print("<span class='pull-left'> In progress... </span>");
+                                    out.println("<span class='test'></span>");
                                 }
                                 out.println("<div class='d-flex justify-content-center'><a class='collapsed' data-toggle='collapse' data-parent='#accordion' href='#collapse" + cont + "' aria-expanded='false' aria-controls='collapse" + cont + "' >" + ts.getTask() + "</a></div>");
                                 out.println("<div class='d-flex flex-row-reverse'>");
@@ -89,7 +89,7 @@
                                 out.println("<span><a href='ControlTask?action=removeTask&id=" + ts.getId() + "'><i class='fa fa-trash' aria-hidden='true'></i></a></span>");
 
                                 // Done
-                                out.println("<span class='pr-3'><a href='ControlTask?action=doneTask&id=" + ts.getId() + "'><i class='fa fa-check' aria-hidden='true'></i></a></span>");                                 
+                                out.println("<span class='pr-3'><a href='ControlTask?action=doneTask&id=" + ts.getId() + "'><i class='fa fa-check' aria-hidden='true'></i></a></span>");
 
                                 out.println("</div>");
                                 out.println("</h5>");
@@ -98,9 +98,10 @@
                                 out.println("<div class='card-block text-center'>");
 
                                 // Start
-                                out.println("<span class=''><a href='ControlTask?action=start&id=" + ts.getId() + "'><button class='btn btn-secondary play'><i class='fa fa-play' aria-hidden='true'></i></button></a></span>");
+                                //out.println("<span class=''><a href='ControlTask?action=start&id=" + ts.getId() + "'><button class='btn btn-secondary play'><i class='fa fa-play' aria-hidden='true'></i></button></a></span>");
+                                out.println("<span class=''><button onclick='getStartedAt("+ts.getId()+")' class='btn btn-secondary play'><i class='fa fa-play' aria-hidden='true'></i></button></a></span>");
                                 // Pause                               
-                                out.println("<span class=''><a href='ControlTask?action=pause&id=" + ts.getId() + "' role='button' class='btn btn-secondary pause' disabled><i class='fa fa-stop' aria-hidden='true'></i></a></span>");                                
+                                out.println("<span class=''><a href='ControlTask?action=pause&id=" + ts.getId() + "' role='button' class='btn btn-secondary pause' disabled><i class='fa fa-stop' aria-hidden='true'></i></a></span>");
 
                                 out.println("<p id='totalTime'></p>");
                                 out.println("</div>");
@@ -130,24 +131,30 @@
             $('.fa-trash').click(function () {
                 $(this).parents('.card').addClass('animated zoomOut');
             });
+            
+            function getStartedAt(id){
+                $.get("ControlTask?action=start&id="+id, function(data, status){
+                    alert(data);
+                });
+            }
 
             $('.play').click(function () {
-                var getParameter = function getParameter(param) {
-                    var url = decodeURIComponent(window.location.search.substring(1)),
-                            variables = url.split('&'),
-                            paramName,
-                            i;
+                /*var getParameter = function getParameter(param) {
+                 var url = decodeURIComponent(window.location.search.substring(1)),
+                 variables = url.split('&'),
+                 paramName,
+                 i;
+                 
+                 for (i = 0; i < variables.length; i++) {
+                 paramName = variables[i].split('=');
+                 
+                 if (paramName[0] === param) {
+                 return paramName[1] === undefined ? true : paramName[1];
+                 }
+                 }
+                 }*/
 
-                    for (i = 0; i < variables.length; i++) {
-                        paramName = variables[i].split('=');
 
-                        if (paramName[0] === param) {
-                            return paramName[1] === undefined ? true : paramName[1];
-                        }
-                    }
-                }
-
-                var id = getParameter('id');
                 alert(id);
                 /*$.ajax({
                  url: 'http://localhost:8080/provatodolistCopy/ControlTask?action=getStarted&id='+id;
@@ -157,11 +164,11 @@
                  });*/
                 //$('.pause').prop('disabled', false);
             });
-            
-            if ($('.play').data('clicked')) {
-                $('.pause').prop('disabled', true);
-                console.log("play");
-            }
+
+            /*if ($('.play').data('clicked')) {
+             $('.pause').prop('disabled', true);
+             console.log("play");
+             }*/
 
             $('.pause').click(function () {
                 $('.play').prop('disabled', true);
