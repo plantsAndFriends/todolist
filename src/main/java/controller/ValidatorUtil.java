@@ -8,7 +8,10 @@ package controller;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
+/** Classe per validar el camps del registre.
+ * 
+ *  Aquesta classe compte amb un mètode per camp que es demana al formulari
+ *  del registre, que retornarà true o false segons si és vàlid o no.
  *
  * @author Adria Viñas
  */
@@ -31,9 +34,13 @@ public class ValidatorUtil {
     private String patternPass = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
     
     /**
-     * !!! TODO !!!
-     * @param email
-     * @return 
+     * Mètode per validar l'email.
+     * 
+     * Es comprovarà que que l'email inserit faci "match" amb el pattern de 
+     * l'email declarat prèviament.
+     * 
+     * @param email inserit al formulari
+     * @return true o false
      */
     public boolean validateMail (String email){
         Pattern pattern = Pattern.compile(patternMail, Pattern.CASE_INSENSITIVE);
@@ -42,6 +49,15 @@ public class ValidatorUtil {
         return matcher.matches();
     }
     
+    /**
+     * Mètode per validar el nom d'usuari.
+     * 
+     * Es comprovarà que l'usuari inserit faci "match" amb el pattern del
+     * username declarat prèviament.
+     * 
+     * @param username inserit al formulari
+     * @return true o false
+     */
     public boolean validateUsername (String username){
         Pattern pattern = Pattern.compile(patternUsername);
         Matcher matcher = pattern.matcher(username);
@@ -49,6 +65,15 @@ public class ValidatorUtil {
         return matcher.matches();
     }
     
+    /**
+     * Mètode per validar la contrasenya.
+     * 
+     * Es comprovarà que la password inserida faci "match" amb el pattern de la
+     * password prèviament declarada.
+     * 
+     * @param password inserida al formulari
+     * @return true o false
+     */
     public boolean validatePassword (String password){
         Pattern pattern = Pattern.compile(patternPass);
         Matcher matcher = pattern.matcher(password);

@@ -15,7 +15,23 @@ import javax.servlet.http.HttpServletResponse;
 import model.bd.DAOUser;
 import model.pojo.BeanUser;
 
-/**
+/** Controlador del registre.
+ * 
+ *  Aquesta classe hereta HttpServlet.
+ *  S'arribarà a aquest controlador mitjançant el jsp "signup.jsp", on podran 
+ *  passar dues coses:
+ * 
+ *  1. Es tracti d'un registre: on s'instanciarà la classe ValidatorUtil i es
+ *     comprovarà que tant el nom d'usuari, com l'email, com la password 
+ *     tinguin el format i length vàlid. Si tot es compleix, s'insertarà
+ *     l'usuari a la base de dades, mitjançant el mètode insertUser(BeanUser user)
+ *     del model DAOUser. Es crearà una sessió i es dirigirà l'usuari a 
+ *     l'aplicació.
+ *     En cas que el registre no fos vàlid, es miraria quin camp és l'incorrecte
+ *     i es mostraria un error específic.
+ * 
+ *  2. Hi hagi algun error: on se li mostrarà a l'usuari un missatge d'error 
+ *     friendly.
  *
  * @author clara
  */

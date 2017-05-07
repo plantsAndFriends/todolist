@@ -4,17 +4,18 @@
     Author     : Adria Viñas
 --%>
 
-<%@ page import="java.util.Collections"%>
-<%@ page import="java.util.Iterator"%>
-<%@ page import="model.bd.DAOTask"%>
-<%@ page import="model.pojo.BeanTask"%>
-<%@ page import="model.pojo.BeanUser"%>
-<%@ page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList"%>
+<%@ page import="java.util.Collections" %>
+<%@ page import="java.util.Iterator" %>
+<%@ page import="model.bd.DAOTask" %>
+<%@ page import="model.pojo.BeanTask" %>
+<%@ page import="model.pojo.BeanUser" %>
+<%@ page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet">
@@ -42,23 +43,19 @@
                     </ul>
                 </div>
             </nav>
-        </div>
+        </div><!-- / nav-container-->
 
         <div class="container justify-content-center">
             <h1 class="text-center">Tasks</h1>            
             <form class="form-inline mt-5" action="ControlTask?action=addTask" method="post">
                 <div class="input-group col-md-6 offset-3">    
-
                     <input type="text" class="form-control" name="task" placeholder="Create a task" />
-
                     <span class="input-group-btn">
                         <button id="buttonadd" class="btn btn-secondary" type="submit">+</button><
                     </span>
                 </div>
             </form>
-
-
-        </div>        
+        </div><!-- / container create task -->        
 
         <div class="container mt-5">
             <div class="row">
@@ -69,78 +66,62 @@
                         int id = Integer.parseInt(session.getAttribute("sessid").toString());
                         ArrayList<BeanTask> beanTask = task.getTasks(id);
                         Collections.reverse(beanTask);
-
                         if (task != null) {
                             out.println("<div id='accordion' role='tablist' aria-multiselectable='true' class='text-center'>");
                             for (BeanTask ts : beanTask) {
                                 out.println("<div id='card"+ts.getId()+"' class='card mb-2'>");
-                                out.println("<div id='card-header"+ts.getId()+" 'class='card-header' role='tab' id=heading" + cont + " >");
-                                out.println("<h5>");
-                                out.println("<span class='pull-left' id='time" + ts.getId() + "' ></span>");
-                                out.println("<div class='d-flex justify-content-center'><a class='collapsed' data-toggle='collapse' data-parent='#accordion' href='#collapse" + cont + "' aria-expanded='false' aria-controls='collapse" + cont + "' >" + ts.getTask() + "</a></div>");
-                                out.println("<div class='d-flex flex-row-reverse'>");
+                                    out.println("<div id='card-header"+ts.getId()+" 'class='card-header' role='tab' id=heading" + cont + " >");
+                                        out.println("<h5>");
+                                            out.println("<span class='pull-left' id='time" + ts.getId() + "' ></span>");
+                                            out.println("<div class='d-flex justify-content-center'><a class='collapsed' data-toggle='collapse' data-parent='#accordion' href='#collapse" + cont + "' aria-expanded='false' aria-controls='collapse" + cont + "' >" + ts.getTask() + "</a></div>");
+                                            out.println("<div class='d-flex flex-row-reverse'>");
+                                
+                                                // Trash
+                                                out.println("<span><button onclick='trash(" + ts.getId() + ")' class='btn btn-default' ><i class='fa fa-trash' aria-hidden='true'></i></button></span>");
+                                
+                                                // Done
+                                                out.println("<span class='pr-3'><button onclick='done(" + ts.getId() + ")' class='btn btn-default' ><i class='fa fa-check' aria-hidden='true'></i></button></span>");
+                                            out.println("</div>");
+                                        out.println("</h5>");
+                                    out.println("</div>");
+                                    out.println("<div id='collapse" + cont + "' class='collapse' role='tabpanel' aria-labelledby=heading" + cont + " >");
+                                        out.println("<div id='task" + ts.getId() + "' class='card-block text-center'>");
 
-                                // Trash
-                                //out.println("<span><a href='ControlTask?action=removeTask&id=" + ts.getId() + "'><i class='fa fa-trash' aria-hidden='true'></i></a></span>");
-                                out.println("<span><button onclick='trash(" + ts.getId() + ")' class='btn btn-default' ><i class='fa fa-trash' aria-hidden='true'></i></button></span>");
-                                // Done
-                                //out.println("<span class='pr-3'><a href='ControlTask?action=doneTask&id=" + ts.getId() + "'><i class='fa fa-check' aria-hidden='true'></i></a></span>");
-                                out.println("<span class='pr-3'><button onclick='done(" + ts.getId() + ")' class='btn btn-default' ><i class='fa fa-check' aria-hidden='true'></i></button></span>");
+                                            // Start
+                                            out.println("<span class=''><button onclick='play(" + ts.getId() + ")' class='btn btn-secondary play'><i class='fa fa-play' aria-hidden='true'></i></button></a></span>");
 
-                                out.println("</div>");
-                                out.println("</h5>");
-                                out.println("</div>");
-                                out.println("<div id='collapse" + cont + "' class='collapse' role='tabpanel' aria-labelledby=heading" + cont + " >");
-                                out.println("<div id='task" + ts.getId() + "' class='card-block text-center'>");
+                                            // Pause                               
+                                            out.println("<span class=''><button onclick='pause(" + ts.getId() + ")' class='btn btn-secondary pause'><i class='fa fa-stop' aria-hidden='true'></i></button></a></span>");
 
-                                // Start
-                                //out.println("<span class=''><a href='ControlTask?action=start&id=" + ts.getId() + "'><button class='btn btn-secondary play'><i class='fa fa-play' aria-hidden='true'></i></button></a></span>");
-                                out.println("<span class=''><button onclick='play(" + ts.getId() + ")' class='btn btn-secondary play'><i class='fa fa-play' aria-hidden='true'></i></button></a></span>");
-                                // Pause                               
-                                //out.println("<span class=''><a href='ControlTask?action=pause&id=" + ts.getId() + "'><button class='btn btn-secondary pause'><i class='fa fa-stop' aria-hidden='true'></i></button></a></span>");
-                                out.println("<span class=''><button onclick='pause(" + ts.getId() + ")' class='btn btn-secondary pause'><i class='fa fa-stop' aria-hidden='true'></i></button></a></span>");
-                                out.println("<p id='totalTime'></p>");
+                                            out.println("<p id='totalTime'></p>");
+                                        out.println("</div>");
+                                    out.println("</div>");
                                 out.println("</div>");
-                                out.println("</div>");
-                                out.println("</div>");
-
                                 cont++;
                             }
-
                             out.println("</div>");
                         }
                     %>                    
                 </div>
             </div>
-        </div>
+        </div><!-- / container body -->
 
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
 
         <script>
-
             $(document).ready(function () {
                 $('.pause').prop('disabled', true);
             });
 
-            /*$('.fa-check').click(function () {
-             $(this).parents('.card-header').addClass('alert alert-success');
-             $(this).parents('.card').addClass('animated fadeOutRight');
-             });*/
-
-            /*$('.fa-trash').click(function () {
-             $(this).parents('.card').addClass('animated zoomOut');
-             });*/
-
             function play(id) {
                 $.get("ControlTask?action=start&id=" + id, function (data, status) {
-                    //alert(data);
                     $('#task' + id + ' .play').prop('disabled', true);
                     $('#task' + id + ' .pause').prop('disabled', false);
                 });
             }
-
+            
             function pause(id) {
                 $.get("ControlTask?action=pause&id=" + id, function (data, status) {
                     $("#time" + id).html(data + " min");
@@ -148,52 +129,20 @@
                     $('.play').prop('disabled', false);
                 });
             }
-
+            
             function done(id) {
                 $.get("ControlTask?action=doneTask&id=" + id, function (data, status) {
                     $("#card-header"+id).addClass('alert alert-success');
                     $("#card" + id).addClass('animated fadeOutRight');
                 });
             }
-
+            
             function trash(id) {
                 $.get("ControlTask?action=removeTask&id=" + id, function (data, status) {
                     $("#card" + id).addClass('animated zoomOut');
                 });
             }
-
-            //$('.play').click(function () {
-            /*var getParameter = function getParameter(param) {
-             var url = decodeURIComponent(window.location.search.substring(1)),
-             variables = url.split('&'),
-             paramName,
-             i;
-             
-             for (i = 0; i < variables.length; i++) {
-             paramName = variables[i].split('=');
-             
-             if (paramName[0] === param) {
-             return paramName[1] === undefined ? true : paramName[1];
-             }
-             }
-             }*/
-
-
-            // alert(id);
-            /*$.ajax({
-             url: 'http://localhost:8080/provatodolistCopy/ControlTask?action=getStarted&id='+id;
-             success: function(response) {
-             alert(id);
-             }
-             });*/
-            //$('.pause').prop('disabled', false);
-            // });
-
-            /*if ($('.play').data('clicked')) {
-             $('.pause').prop('disabled', true);
-             console.log("play");
-             }*/
-
+            
             $('.pause').click(function () {
                 $('.play').prop('disabled', true);
             });

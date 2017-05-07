@@ -6,7 +6,6 @@
 
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <jsp:useBean id="bean_signin" scope="request" class="model.pojo.BeanUser" />
-<%-- <%@page isErrorPage="true" %> --%>
 
 <!DOCTYPE html>
 <html>
@@ -21,6 +20,7 @@
     </head>
     <body>
         <jsp:setProperty  name="bean_signin" property="*" />
+        
         <div id="nav-container">
             <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
@@ -38,17 +38,9 @@
                     </ul>
                 </div>
             </nav>
-        </div>
+        </div><!-- / nav-container -->
+        
         <div class="container mt-5">
-            <%--<%
-                /*if (exception.getCause() instanceof InvalEa
-                 ) {
-                 out.print("missatge a mostrar");
-                 } else {
-                 out.print("asdf");
-
-                 }*/
-            %>--%>
             <h1 class="text-center pt-5 mb-5">Sign in to Todolist</h1>
 
             <%
@@ -84,14 +76,10 @@
             </form> 
 
             <% } else { %>
-            <jsp:forward page="ControlLogin?action=loginUser"/> 
+                <jsp:forward page="ControlLogin?action=loginUser"/> 
             <% }%>
 
-        </div>
-
-        <!--<div class="error">
-        <%-- <%= ${error_msg} %> --%>
-     </div>-->
+        </div><!-- / container -->
 
         <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>

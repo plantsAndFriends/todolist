@@ -8,7 +8,8 @@ package model.pojo;
 import java.io.Serializable;
 
 /**
- *
+ * Classe bean amb els atributs, constructor, getters i setters d'un usuari
+ * 
  * @author clara
  */
 public class BeanUser implements Serializable {
@@ -58,6 +59,4 @@ public class BeanUser implements Serializable {
     public String toString() {
         return "BeanUser{" + "id=" + id + ", username=" + username + ", email=" + email + ", password=" + password + '}';
     }
-
-    
 }

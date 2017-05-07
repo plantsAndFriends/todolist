@@ -37,4 +37,14 @@ and open the template in the editor.
     color: #d9534f !important;
 }
 
+.fa-check, .fa-trash {
+    font-size: 20px;
+}
 
+.btn-default {
+    background-color: transparent!important;
+}
+
+.btn-default:hover {
+    cursor: pointer;
+}

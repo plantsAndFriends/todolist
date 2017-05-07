@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
+ * Classe bean amb els atributs, constructor, getters i setters d'una tasca
  *
  * @author clara
  */
@@ -18,8 +19,6 @@ public class BeanTask  implements Serializable {
     private Date startedAt;
     private Date completedAt;
     private int user_id;
-
-    
 
     public BeanTask() {
     

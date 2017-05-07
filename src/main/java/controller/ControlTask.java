@@ -16,8 +16,18 @@ import javax.servlet.http.HttpServletResponse;
 import model.bd.DAOTask;
 import model.pojo.BeanTask;
 
-/**
- *
+/** Controlador de les tasques.
+ *  
+ *  Aquesta classe hereta HttpServlet.
+ *  S'arribarà a aquest controlador mitjançant el jsp "app.jsp".
+ * 
+ *  En aquesta classe es pot afegir tasques (addTask), esborrar-ne (removeTask), 
+ *  marcar-ne com a fetes (doneTask), començar a temporitzar una tasca (start),
+ *  aturar el temporitzador i saber el temps total invertit en una tasca (pause).
+ * 
+ *  Tots els mètodes que interactuen amb la base de dades es troben al model 
+ *  DAOTask.
+ * 
  * @author clara
  */
 public class ControlTask extends HttpServlet {
@@ -32,7 +42,7 @@ public class ControlTask extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+        throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
         try {
@@ -48,6 +58,7 @@ public class ControlTask extends HttpServlet {
                 req = request.getParameter("id");
                 id = Integer.parseInt(req);
             }
+            
             if (op.equals("addTask") || op.equals("removeTask") || op.equals("doneTask") || op.equals("start")) {
                 switch (op) {
                     case "addTask":
@@ -59,28 +70,12 @@ public class ControlTask extends HttpServlet {
                         access.removeTask(id);
                         break;
                     case "doneTask":
-                        Thread.sleep(100); // sleep
+                        Thread.sleep(100);
                         access.removeTask(id);
                         break;
                     case "start":
                         access.startTask(id);
                         break;
-                    /*case "pause":
-                        access.pauseTask(id);
-
-                        Date start = access.getStartedAt(id);
-                        Date pause = access.getCompletedAt(id);
-
-                        long tt = access.totalTime(start, pause);
-
-                        request.setAttribute("time", tt);
-                        response.setContentType("text/plain");
-                    response.setCharacterEncoding(("UTF-8"));
-                    response.getWriter().write(op);*/
-                        //request.getSession().setAttribute("time", tt);
-                        //response.sendRedirect(request.getHeader("referer"));
-//                        break;
-
                 }
                 RequestDispatcher rq = request.getRequestDispatcher("app.jsp");
                 rq.forward(request, response);
@@ -99,16 +94,12 @@ public class ControlTask extends HttpServlet {
                 response.getWriter().write(aux);
             }
 
-//            RequestDispatcher rq = request.getRequestDispatcher("app.jsp");
-//            rq.forward(request, response);
         } catch (Exception e) {
             System.out.println("Some kind of error happened when you were chillin'");
             throw new ServletException(e);
         }
-
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

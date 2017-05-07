@@ -15,10 +15,11 @@
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" href="css/style.css"/>
 
-        <title>JSP Page</title>
+        <title>Sign up to Todolist</title>
     </head>
     <body>
         <jsp:setProperty  name="bean_signup" property="*" />
+        
         <div id="nav-container">
             <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"  aria-label="Toggle navigation">
@@ -36,7 +37,8 @@
                     </ul>
                 </div>
             </nav>
-        </div>
+        </div><!-- / nav-container -->
+        
         <div class="container mt-5">
             <h1 class="text-center pt-5">Sign up to Todolist</h1>
             <div class="row mt-2">
@@ -65,8 +67,8 @@
 
                         }
                     %>
-                </div>
-            </div>
+                </div><!-- / col -->
+            </div><!-- / row -->
 
 
             <% if (request.getParameter("username") == null) { %>      
@@ -97,10 +99,10 @@
             </form> 
 
             <% } else { %>
-            <jsp:forward page="ControlRegistro?action=insertUser"/>
+                <jsp:forward page="ControlRegistro?action=insertUser"/>
             <% }%>
 
-        </div>        
+        </div><!-- / container -->
 
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>

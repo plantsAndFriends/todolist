@@ -20,7 +20,23 @@ import model.bd.DAOUser;
 import model.pojo.BeanUser;
 import model.bd.Bd;
 
-/**
+/** Controlador del login.
+ * 
+ *  Aquesta classe hereta HttpServlet.
+ *  S'arribarà a aquest controlador mitjançant el jsp "login.jsp", on podran 
+ *  passar tres coses:
+ * 
+ *  1. Es tracti d'un login: on es crearà una sessió i es validaran les credencials
+ *     de l'usuari amb el mètode validateUser(BeanUser user) del model DAOUser, 
+ *     on es comprova si aquell email i aquella password existeixen. 
+ *     Si les dades són vàlides, l'usuari serà dirigit a l'aplicació.
+ *     Sinó, s'enviarà al formulari de login un missatge d'error.
+ *  
+ *  2. Es tracti d'un logout: on es farà invàlida la sessió i es portarà a 
+ *     l'usuari a la pàgina inicial de l'aplicació.
+ * 
+ *  3. Hi hagi algun error: on se li mostrarà a l'usuari un missatge d'error 
+ *     friendly.
  *
  * @author clara
  */
@@ -52,8 +68,6 @@ public class ControlLogin extends HttpServlet {
                 } else {
                     request.getSession().setAttribute("mssLogin", "We're sorry! Wrong authentication!");
                     response.sendRedirect(request.getHeader("referer"));
-//                    out.println("We're sorry! Wrong authentication!");
-//                    out.println("<a href='signin.jsp'><button>Try again</button></a>");
                 }
             } else {
                 if (op.equals("logout")) {
